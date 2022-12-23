@@ -1,13 +1,13 @@
 import styled from 'styled-components'
-import avatarIcon from '../../assets/images/external-User-users-those-icons-fill-those-icons-3.png'
-import graphIcon from '../../assets/images/combo-chart--v1.png'
-import ringIcon from '../../assets/images/bell--v1.png'
-import homeIcon from '../../assets/images/home-page.png'
-import settingIcon from '../../assets/images/external-setting-essentials-pack-tanah-basah-glyph-tanah-basah.png'
-import logoutIcon from '../../assets/images/exit.png'
+import avatarIcon from '../../../assets/images/external-User-users-those-icons-fill-those-icons-3.png'
+import graphIcon from '../../../assets/images/combo-chart--v1.png'
+import ringIcon from '../../../assets/images/bell--v1.png'
+import homeIcon from '../../../assets/images/home-page.png'
+import settingIcon from '../../../assets/images/external-setting-essentials-pack-tanah-basah-glyph-tanah-basah.png'
+import logoutIcon from '../../../assets/images/exit.png'
 
 const Navbar = styled.nav`
-    padding: 10px 14px;
+    padding: 4px 24px;
     display: flex;
     box-shadow: 0px 0px 4px #ededed;
     align-items: center;

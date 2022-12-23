@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import AddIcon from '../../assets/images/add--v1.png'
+import AddIcon from '../../../assets/images/add--v1.png'
 
 const AddTask = styled.div`
     padding: 8px;

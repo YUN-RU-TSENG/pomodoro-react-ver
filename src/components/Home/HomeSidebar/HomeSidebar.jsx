@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import sunIcon from '../../assets/images/sun.png'
-import sunsetIcon from '../../assets/images/external-sunset-3.png'
-import calenderNotYetIcon from '../../assets/images/calendar--v1-1.png'
-import calenderFinishIcon from '../../assets/images/calendar--v1-2.png'
-import checkedIcon from '../../assets/images/checked.png'
-import folderIcon from '../../assets/images/folder-invoices--v1.png'
-import addIcon from '../../assets/images/add--v1-1.png'
+import sunIcon from '../../../assets/images/sun.png'
+import sunsetIcon from '../../../assets/images/external-sunset-3.png'
+import calenderNotYetIcon from '../../../assets/images/calendar--v1-1.png'
+import calenderFinishIcon from '../../../assets/images/calendar--v1-2.png'
+import checkedIcon from '../../../assets/images/checked.png'
+import folderIcon from '../../../assets/images/folder-invoices--v1.png'
+import addIcon from '../../../assets/images/add--v1-1.png'
 
 const Sidebar = styled.aside`
     display: flex;

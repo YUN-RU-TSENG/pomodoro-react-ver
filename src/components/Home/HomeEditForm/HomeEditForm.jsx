@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import clockIcon from '../../assets/images/retro-alarm-clock.png'
-import calenderIcon from '../../assets/images/calendar--v1.png'
-import fileIcon from '../../assets/images/folder-invoices--v1.png'
-import ringIcon from '../../assets/images/bell--v1.png'
-import viewIcon from '../../assets/images/full-page-view.png'
-import trashIcon from '../../assets/images/trash--v1.png'
+import clockIcon from '../../../assets/images/retro-alarm-clock.png'
+import calenderIcon from '../../../assets/images/calendar--v1.png'
+import fileIcon from '../../../assets/images/folder-invoices--v1.png'
+import ringIcon from '../../../assets/images/bell--v1.png'
+import viewIcon from '../../../assets/images/full-page-view.png'
+import trashIcon from '../../../assets/images/trash--v1.png'
 
 const EditForm = styled.section`
     padding: 8px;
