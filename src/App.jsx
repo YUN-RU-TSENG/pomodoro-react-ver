@@ -1,5 +1,19 @@
+import { useSelector, useDispatch } from 'react-redux'
+import { getUser } from './features/user/userSlice'
+import { useEffect } from 'react'
+
 function App(props) {
-    return <div className="App">{props.children}</div>
+    // === redux store ===
+    const userStore = useSelector((state) => state.user)
+    const dispatch = useDispatch()
+
+    // === component logic ===
+    useEffect(() => {
+        if (!userStore.isLoadedUserState) dispatch(getUser())
+    })
+
+    // render
+    return <div className="App">{!userStore.isLoadedUserState ? 'loading' : props.children}</div>
 }
 
 export default App

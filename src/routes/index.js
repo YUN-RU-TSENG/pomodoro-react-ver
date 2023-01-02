@@ -6,11 +6,17 @@ import UserSetting from '../pages/UserSetting.jsx'
 import Register from '../pages/Register.jsx'
 import Login from '../pages/Login.jsx'
 import NotFound from '../pages/NotFound.jsx'
+import RequireAuth from './RequireAuth.jsx'
+import RequireGuest from './RequireGuest.jsx'
 
 export default createBrowserRouter([
     {
         path: '/',
-        element: <Home />,
+        element: (
+            <RequireAuth>
+                <Home />
+            </RequireAuth>
+        ),
         children: [
             {
                 path: '/',
@@ -28,11 +34,19 @@ export default createBrowserRouter([
     },
     {
         path: '/register',
-        element: <Register />,
+        element: (
+            <RequireGuest>
+                <Register />
+            </RequireGuest>
+        ),
     },
     {
         path: '/Login',
-        element: <Login />,
+        element: (
+            <RequireGuest>
+                <Login />
+            </RequireGuest>
+        ),
     },
     {
         path: '/*',
