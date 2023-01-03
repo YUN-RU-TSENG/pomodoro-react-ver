@@ -29,8 +29,8 @@ const ModalCard = styled.section`
 
 const Close = styled.button`
     position: absolute;
-    right: 12px;
-    top: 12px;
+    right: 6px;
+    top: 6px;
     padding: 4px;
 `
 
