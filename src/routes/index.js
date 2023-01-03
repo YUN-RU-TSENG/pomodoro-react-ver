@@ -19,7 +19,7 @@ export default createBrowserRouter([
         ),
         children: [
             {
-                path: '/',
+                path: '',
                 element: <Tasks />,
             },
             {

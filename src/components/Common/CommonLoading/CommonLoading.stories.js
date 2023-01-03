@@ -9,5 +9,9 @@ export default {
 const Template = (args) => <CommonLoading {...args} />
 
 export const Default = {
-    args: { children: '' },
+    args: { text: '' },
+}
+
+export const Message = {
+    args: { text: '文字內容' },
 }

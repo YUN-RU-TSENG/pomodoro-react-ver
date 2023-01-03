@@ -9,5 +9,5 @@ export default {
 const Template = (args) => <CommonForm {...args} />
 
 export const Default = {
-    args: { children: '' },
+    args: { children: '', title: '標題', message: '文字' },
 }

@@ -11,3 +11,11 @@ const Template = (args) => <CommonButton {...args} />
 export const Default = {
     args: { children: 'button' },
 }
+
+export const Green = {
+    args: { children: 'button', color: 'green' },
+}
+
+export const Full = {
+    args: { children: 'button', color: 'green', type: 'block' },
+}

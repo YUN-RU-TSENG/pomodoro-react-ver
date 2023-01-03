@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components'
+import PropTypes from 'prop-types'
 
 const LoadWrapper = styled.div`
     position: fixed;
@@ -12,7 +13,7 @@ const LoadWrapper = styled.div`
 `
 const LoadCard = styled.section`
     padding: 24px;
-    background: #00000050;
+    background: #00000030;
     border-radius: 4px;
     text-align: center;
     flex: 0 1 120px;
@@ -40,18 +41,24 @@ const LoadingIcon = styled.button`
 const Message = styled.p`
     font-size: 14px;
     font-weight: 400;
-    margin: 4px 0px;
+    margin-top: 4px;
 `
 
-function CommonLoading() {
+function CommonLoading({ text }) {
     return (
         <LoadWrapper>
             <LoadCard>
                 <LoadingIcon></LoadingIcon>
-                <Message>訊息</Message>
+                {text && <Message>{text}</Message>}
             </LoadCard>
         </LoadWrapper>
     )
 }
+
+CommonLoading.propTypes = {
+    text: PropTypes.string,
+}
+
+CommonLoading.defaultProps = {}
 
 export default CommonLoading

@@ -11,7 +11,7 @@ const initialState = {
     // === Register ===
     isLoadingRegister: false,
     ErrorOfRegister: null,
-    // === Login ===
+    // === login ===
     isLoadingLogin: false,
     ErrorOfLogin: null,
     // === Logout ===
@@ -31,7 +31,7 @@ export const getUser = createAsyncThunk('user/getUser', () => {
         const unsubscribe = auth.onAuthStateChanged(
             (user) => {
                 unsubscribe()
-                if (user) resolve(user)
+                if (user) resolve({ email: user.email, uid: user.uid })
                 resolve({ email: null, uid: null })
             },
             (error) => {
@@ -47,7 +47,7 @@ export const getUser = createAsyncThunk('user/getUser', () => {
  * @param {Object} 登入信箱、密碼
  * @returns {Promise} 成功返回 user 狀態；失敗返回錯誤原因
  */
-export const Login = createAsyncThunk('user/login', async ({ email, password }) => {
+export const login = createAsyncThunk('user/login', async ({ email, password }) => {
     try {
         const { user } = await signInWithEmailAndPassword(auth, email, password)
         return { email: user.email, uid: user.uid }
@@ -61,7 +61,7 @@ export const Login = createAsyncThunk('user/login', async ({ email, password }) 
  * @param {Object} 註冊信箱、密碼
  * @returns {Promise} 成功返回 user 狀態；失敗返回錯誤原因
  */
-export const Register = createAsyncThunk('user/register', async ({ email, password }) => {
+export const register = createAsyncThunk('user/register', async ({ email, password }) => {
     try {
         const { user } = await createUserWithEmailAndPassword(auth, email, password)
         return { email: user.email, uid: user.uid }
@@ -89,40 +89,43 @@ export const tasksSlice = createSlice({
         builder
             // === getUser ===
             .addCase(getUser.pending, (state, action) => {
-                state.isLoadedUserState = true
                 state.isLoadingUserGet = true
             })
             .addCase(getUser.fulfilled, (state, action) => {
                 state.isLoadingUserGet = false
                 state.user = action.payload
+                state.isLoadedUserState = true
             })
             .addCase(getUser.rejected, (state, action) => {
                 state.isLoadingUserGet = false
                 state.ErrorOfUserGet = action.error
+                state.isLoadedUserState = true
             })
         // === Register ===
         builder
-            .addCase(Register.pending, (state, action) => {
+            .addCase(register.pending, (state, action) => {
+                state.ErrorOfRegister = null
                 state.isLoadingRegister = true
             })
-            .addCase(Register.fulfilled, (state, action) => {
+            .addCase(register.fulfilled, (state, action) => {
                 state.isLoadingRegister = false
                 state.user = action.payload
             })
-            .addCase(Register.rejected, (state, action) => {
+            .addCase(register.rejected, (state, action) => {
                 state.isLoadingRegister = false
                 state.ErrorOfRegister = action.error
             })
-        // === Login ===
+        // === login ===
         builder
-            .addCase(Login.pending, (state, action) => {
+            .addCase(login.pending, (state, action) => {
+                state.ErrorOfLogin = null
                 state.isLoadingLogin = true
             })
-            .addCase(Login.fulfilled, (state, action) => {
+            .addCase(login.fulfilled, (state, action) => {
                 state.isLoadingLogin = false
                 state.user = action.payload
             })
-            .addCase(Login.rejected, (state, action) => {
+            .addCase(login.rejected, (state, action) => {
                 state.isLoadingLogin = false
                 state.ErrorOfLogin = action.error
             })

@@ -9,5 +9,34 @@ export default {
 const Template = (args) => <CommonInput {...args} />
 
 export const Default = {
-    args: { children: '' },
+    args: {
+        title: '',
+        errorMessage: '',
+        attributes: {},
+        label: 'label',
+        register: () => {},
+        required: {},
+    },
+}
+
+export const Title = {
+    args: {
+        title: '標題',
+        errorMessage: '',
+        attributes: {},
+        label: 'label',
+        register: () => {},
+        required: {},
+    },
+}
+
+export const ErrorMessage = {
+    args: {
+        title: '',
+        errorMessage: '錯誤訊息',
+        attributes: {},
+        label: 'label',
+        register: () => {},
+        required: {},
+    },
 }

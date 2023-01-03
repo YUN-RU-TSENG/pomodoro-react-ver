@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { getUser } from './features/user/userSlice'
+
 import { useEffect } from 'react'
+
+import CommonLoading from './components/Common/CommonLoading/CommonLoading.jsx'
 
 function App(props) {
     // === redux store ===
@@ -13,7 +16,11 @@ function App(props) {
     })
 
     // render
-    return <div className="App">{!userStore.isLoadedUserState ? 'loading' : props.children}</div>
+    return (
+        <div className="App">
+            {!userStore.isLoadedUserState ? <CommonLoading /> : props.children}
+        </div>
+    )
 }
 
 export default App

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import closeIcon from '../../../assets/images/delete-sign--v1.png'
+import PropTypes from 'prop-types'
 
 const ModalWrapper = styled.div`
     position: fixed;
@@ -13,6 +14,7 @@ const ModalWrapper = styled.div`
     z-index: 9;
     align-items: center;
     justify-content: center;
+    background: #00000030;
 `
 
 const ModalCard = styled.section`
@@ -38,22 +40,31 @@ const Icon = styled.img`
 `
 
 const Message = styled.p`
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: ${(props) => (props.children ? '12px' : '0')};
 `
 
-function CommonModal(props) {
+function CommonModal({ children, title, onClick }) {
     return (
         <ModalWrapper>
             <ModalCard>
-                <Close>
+                <Close onClick={onClick}>
                     <Icon src={closeIcon}></Icon>
                 </Close>
-                <Message>文字</Message>
-                {props.children}
+                <Message>{title}</Message>
+                {children}
             </ModalCard>
         </ModalWrapper>
     )
 }
+
+CommonModal.propTypes = {
+    title: PropTypes.string,
+    children: PropTypes.node,
+    onClick: PropTypes.func,
+}
+
+CommonModal.defaultProps = {}
 
 export default CommonModal

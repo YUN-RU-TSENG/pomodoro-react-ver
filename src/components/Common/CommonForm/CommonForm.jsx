@@ -1,8 +1,8 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Form = styled.form`
     width: 320px;
-    margin: 0 auto;
     padding: 32px 20px;
     text-align: center;
 
@@ -10,7 +10,7 @@ const Form = styled.form`
     background-color: #fff;
     box-shadow: 0 0 4px #ededed;
 
-    *:not(:last-child) {
+    & > *:not(:last-child) {
         margin-bottom: 12px;
     }
 `
@@ -27,14 +27,20 @@ const Text = styled.p`
     color: gray;
 `
 
-function CommonForm(props) {
+function CommonForm({ children, title, message }) {
     return (
         <Form>
-            <Title>標題</Title>
-            <Text>文字</Text>
-            {props.children}
+            <Title>{title}</Title>
+            <Text>{message}</Text>
+            {children}
         </Form>
     )
+}
+
+CommonForm.propTypes = {
+    children: PropTypes.node,
+    title: PropTypes.string.isRequired,
+    message: PropTypes.string,
 }
 
 export default CommonForm

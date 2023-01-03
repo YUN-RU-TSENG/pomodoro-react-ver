@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Label = styled.label`
     display: inline-block;
@@ -20,6 +21,7 @@ const Input = styled.input`
     border: 1px solid #ededed;
     border-radius: 4px;
     font-size: 14px;
+    text-align: center;
     line-height: 21px;
     transition: all 0.3s ease;
 `
@@ -31,14 +33,25 @@ const ErrorMessage = styled.p`
     text-align: left;
 `
 
-function CommonInput(props) {
+function CommonInput({ title, errorMessage, label, register, required, attributes }) {
     return (
         <Label>
-            <Title>標題</Title>
-            <Input></Input>
-            <ErrorMessage>錯誤文字</ErrorMessage>
+            <Title>{title}</Title>
+            <Input {...register(label, { required })} {...attributes}></Input>
+            <ErrorMessage>{errorMessage}</ErrorMessage>
         </Label>
     )
 }
+
+CommonInput.propTypes = {
+    title: PropTypes.string,
+    errorMessage: PropTypes.string,
+    attributes: PropTypes.object,
+    label: PropTypes.string.isRequired,
+    register: PropTypes.func.isRequired,
+    required: PropTypes.object,
+}
+
+CommonInput.defaultProps = { attributes: {} }
 
 export default CommonInput
