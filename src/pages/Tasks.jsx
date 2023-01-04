@@ -1,5 +1,8 @@
-import styled from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { getTasks, postTask } from '../features/tasks/tasksSlice'
 
+import styled from 'styled-components'
 import HomeSidebar from '../components/Home/HomeSidebar/HomeSidebar.jsx'
 import HomeTimeSum from '../components/Home/HomeTimeSum/HomeTimeSum.jsx'
 import HomeAddTask from '../components/Home/HomeAddTask/HomeAddTask.jsx'
@@ -22,9 +25,16 @@ const ContentWrapper = styled.div`
     display: flex;
     background: #f7f7f7;
 `
+
+const HomeListWrapper = styled.div`
+    height: 570px;
+    overflow: scroll;
+`
+
 const HomeTasksWrapper = styled.div`
     flex: 1 1 auto;
 `
+
 const HomeEditFormWrapper = styled.div`
     flex: 0 1 320px;
     // display: none;
@@ -35,6 +45,13 @@ const HomeEditFormWrapper = styled.div`
 `
 
 function Tasks() {
+    const tasksStore = useSelector((state) => state.tasks)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getTasks())
+    }, [])
+
     return (
         <MainWrapper>
             <HomeSidebarWrapper>
@@ -43,8 +60,13 @@ function Tasks() {
             <ContentWrapper>
                 <HomeTasksWrapper>
                     <HomeTimeSum></HomeTimeSum>
-                    <HomeAddTask></HomeAddTask>
-                    <HomeList></HomeList>
+                    <HomeAddTask addTask={(data) => dispatch(postTask(data))}></HomeAddTask>
+                    <HomeListWrapper>
+                        <HomeList
+                            items={tasksStore.tasks}
+                            isLoading={tasksStore.isLoadingTaskGet}
+                        />
+                    </HomeListWrapper>
                 </HomeTasksWrapper>
                 <HomeEditFormWrapper>
                     <HomeEditForm></HomeEditForm>

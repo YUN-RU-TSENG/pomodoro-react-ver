@@ -15,7 +15,7 @@ export default function RequireAuth(props) {
     // === component logic ===
     useEffect(() => {
         if (!userStore.isLoadedUserState) dispatch(getUser())
-    }, [userStore, dispatch])
+    }, [userStore.isLoadedUserState])
 
     // 判斷是否登入，有則返回頁面，無則返到登入頁
     if (!userStore.isLoadedUserState) return <CommonLoading />

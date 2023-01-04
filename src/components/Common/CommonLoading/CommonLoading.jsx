@@ -5,15 +5,16 @@ const LoadWrapper = styled.div`
     position: fixed;
     top: 0px;
     left: 0px;
-    width: 100vw;
-    height: 100vh;
+    bottom: 0px;
+    right: 0px;
+    margin: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
 `
 const LoadCard = styled.section`
     padding: 24px;
-    background: #00000030;
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 4px;
     text-align: center;
     flex: 0 1 120px;
@@ -28,7 +29,7 @@ const circle = keyframes`
     }
 `
 
-const LoadingIcon = styled.button`
+const LoadingIcon = styled.div`
     margin: 0 auto;
     width: 24px;
     height: 24px;
@@ -44,9 +45,9 @@ const Message = styled.p`
     margin-top: 4px;
 `
 
-function CommonLoading({ text }) {
+function CommonLoading({ text,className }) {
     return (
-        <LoadWrapper>
+        <LoadWrapper className={className}>
             <LoadCard>
                 <LoadingIcon></LoadingIcon>
                 {text && <Message>{text}</Message>}
@@ -57,6 +58,7 @@ function CommonLoading({ text }) {
 
 CommonLoading.propTypes = {
     text: PropTypes.string,
+    className: PropTypes.string,
 }
 
 CommonLoading.defaultProps = {}

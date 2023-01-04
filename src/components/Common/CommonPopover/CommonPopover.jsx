@@ -1,5 +1,12 @@
 import styled from 'styled-components'
 
+import { useFloating, offset, flip, shift, autoUpdate } from '@floating-ui/react'
+import { createPortal } from 'react-dom'
+
+const Wrapper = styled.div`
+    position: relative;
+`
+
 const Button = styled.button`
     padding: 4px 12px;
     font-size: 14px;
@@ -10,7 +17,9 @@ const Button = styled.button`
 `
 
 const PopoverWrapper = styled.div`
-    position: relative;
+    position: absolute;
+    top: 24px;
+    right: 0px;
     padding: 12px;
     background: #fff;
     border-radius: 4px;
@@ -20,23 +29,49 @@ const PopoverWrapper = styled.div`
     font-size: 14px;
     line-weight: 21px;
 
+    > *:not(:last-child) {
+        margin-bottom: 12px;
+    }
+
     &::before {
         display: block;
         content: '';
         position: absolute;
         top: -12px;
-        left: 12px;
+        left: 114px;
         border: 6px solid;
         border-color: transparent transparent #fff transparent;
     }
 `
 
-function CommonPopover(props) {
+function CommonPopover({ text, children, isOpen, onClick }) {
+    const { x, y, reference, floating, strategy } = useFloating({
+        placement: 'bottom',
+        middleware: [offset(18), flip(), shift()],
+        whileElementsMounted: autoUpdate,
+    })
+
     return (
-        <div>
-            <Button>{props.text}</Button>
-            <PopoverWrapper>{props.children}</PopoverWrapper>
-        </div>
+        <Wrapper>
+            <Button onClick={onClick} type="button" ref={reference}>
+                {text}
+            </Button>
+            {createPortal(
+                isOpen && (
+                    <PopoverWrapper
+                        ref={floating}
+                        style={{
+                            position: strategy,
+                            top: y ?? 0,
+                            left: x ?? 0,
+                        }}
+                    >
+                        {children}
+                    </PopoverWrapper>
+                ),
+                document.body
+            )}
+        </Wrapper>
     )
 }
 

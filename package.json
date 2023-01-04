@@ -50,11 +50,13 @@
     ]
   },
   "dependencies": {
+    "@floating-ui/react": "^0.15.1",
     "@hookform/resolvers": "^2.9.10",
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "dayjs": "^1.11.7",
     "firebase": "^9.15.0",
     "husky": "^8.0.2",
     "lint-staged": "^13.1.0",

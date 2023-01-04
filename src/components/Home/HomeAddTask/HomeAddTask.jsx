@@ -1,7 +1,18 @@
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+
+import { useState } from 'react'
+
 import styled from 'styled-components'
 import AddIcon from '../../../assets/images/add--v1.png'
 
-const AddTask = styled.div`
+import CommonInput from '../../Common/CommonInput/CommonInput'
+import CommonPopover from '../../Common/CommonPopover/CommonPopover'
+import CommonButton from '../../Common/CommonButton/CommonButton'
+import CommonDropdown from '../../Common/CommonDropdown/CommonDropdown'
+
+const AddTask = styled.form`
     padding: 8px;
     border-radius: 4px;
     display: flex;
@@ -24,11 +35,16 @@ const AddImg = styled.img`
     vertical-align: middle;
 `
 
-const Input = styled.input`
+const Input = styled(CommonInput)`
     flex: 1 1 auto;
     font-size: 16px;
     light-height: 24px;
     padding: 4px;
+    width: auto;
+
+    input {
+        text-align: left;
+    }
 `
 
 const Line = styled.div`
@@ -42,17 +58,72 @@ const Button = styled.button`
     border-radius: 4px;
 `
 
-function HomeAddTask() {
+const schema = yup.object({
+    name: yup.string().required(),
+    totalExpectTime: yup.number().min(0),
+    folder: yup.string(),
+})
+
+function HomeAddTask({ addTask }) {
+    const [isTotalExpectTimePopoverOpen, setIsTotalExpectTimePopoverOpen] = useState(false)
+    const [isFolderPopoverOpen, setIsFolderPopoverOpen] = useState(false)
+    const { register, handleSubmit, setValue, watch, reset } = useForm({
+        resolver: yupResolver(schema),
+        defaultValues: {
+            name: '',
+            totalExpectTime: 0,
+            folder: '',
+        },
+    })
+
+    const onSubmit = handleSubmit((data) => {
+        addTask(data)
+        reset()
+    })
+
     return (
         <AddTask>
-            <Add>
+            <Add onClick={onSubmit} type="submit">
                 <AddImg src={AddIcon} />
             </Add>
-            <Input />
-            <Button>按鈕</Button>
-            <Button>按鈕</Button>
+            <Input attributes={{}} label="name" register={register} />
+            <CommonPopover
+                text="pomodoro"
+                isOpen={isTotalExpectTimePopoverOpen}
+                onClick={() => setIsTotalExpectTimePopoverOpen(!isTotalExpectTimePopoverOpen)}
+            >
+                <CommonInput
+                    attributes={{ type: 'number', min: 0 }}
+                    label="totalExpectTime"
+                    register={register}
+                />
+                <CommonButton
+                    color="green"
+                    onClick={() => setIsTotalExpectTimePopoverOpen(!isTotalExpectTimePopoverOpen)}
+                    type="block"
+                >
+                    關閉
+                </CommonButton>
+            </CommonPopover>
             <Line></Line>
-            <Button>按鈕</Button>
+            <CommonPopover
+                text="folder"
+                isOpen={isFolderPopoverOpen}
+                onClick={() => setIsFolderPopoverOpen(!isFolderPopoverOpen)}
+            >
+                <CommonDropdown
+                    items={[1, 2, 3, 4]}
+                    selectItem={watch('folder')}
+                    updateSelectItem={(value) => setValue('folder', value)}
+                />
+                <CommonButton
+                    color="green"
+                    onClick={() => setIsFolderPopoverOpen(!isFolderPopoverOpen)}
+                    type="block"
+                >
+                    關閉
+                </CommonButton>
+            </CommonPopover>
         </AddTask>
     )
 }

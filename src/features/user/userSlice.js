@@ -14,7 +14,7 @@ const initialState = {
     // === login ===
     isLoadingLogin: false,
     ErrorOfLogin: null,
-    // === Logout ===
+    // === logout ===
     isLoadingLogout: false,
     ErrorOfLogout: null,
 }
@@ -70,7 +70,7 @@ export const register = createAsyncThunk('user/register', async ({ email, passwo
     }
 })
 
-export const Logout = createAsyncThunk('user/logout', async () => {
+export const logout = createAsyncThunk('user/logout', async () => {
     try {
         await signOut(auth)
         return { email: null, uid: null }
@@ -129,16 +129,16 @@ export const tasksSlice = createSlice({
                 state.isLoadingLogin = false
                 state.ErrorOfLogin = action.error
             })
-        // === Logout ===
+        // === logout ===
         builder
-            .addCase(Logout.pending, (state, action) => {
+            .addCase(logout.pending, (state, action) => {
                 state.isLoadingLogout = true
             })
-            .addCase(Logout.fulfilled, (state, action) => {
+            .addCase(logout.fulfilled, (state, action) => {
                 state.isLoadingLogout = false
                 state.user = action.payload
             })
-            .addCase(Logout.rejected, (state, action) => {
+            .addCase(logout.rejected, (state, action) => {
                 state.isLoadingLogout = false
                 state.ErrorOfLogout = action.error
             })

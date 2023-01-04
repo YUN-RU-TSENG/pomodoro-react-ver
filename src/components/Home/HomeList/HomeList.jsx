@@ -1,6 +1,9 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import PropTypes from 'prop-types'
+import CommonLoading from '../../Common/CommonLoading/CommonLoading'
 
 const List = styled.ul`
+    position: relative;
     > *:not(:last-child) {
         margin-bottom: 8px;
     }
@@ -28,26 +31,32 @@ const Date = styled.p`
     margin-left: auto;
 `
 
-function HomeList() {
+const PositionLoading = styled(CommonLoading)`
+    position: absolute;
+`
+
+function HomeList({ items, isLoading }) {
+    const itemElements = items.map((item) => (
+        <Item key={item.id}>
+            <Checkbox></Checkbox>
+            <Text>{item.name}</Text>
+            <Date>{item.createAt}</Date>
+        </Item>
+    ))
+
     return (
         <List>
-            <Item>
-                <Checkbox></Checkbox>
-                <Text>Text</Text>
-                <Date>2022/12/12</Date>
-            </Item>
-            <Item>
-                <Checkbox></Checkbox>
-                <Text>Text</Text>
-                <Date>2022/12/12</Date>
-            </Item>
-            <Item>
-                <Checkbox></Checkbox>
-                <Text>Text</Text>
-                <Date>2022/12/12</Date>
-            </Item>
+            {itemElements}
+            {isLoading && <PositionLoading></PositionLoading>}
         </List>
     )
 }
+
+HomeList.propTypes = {
+    items: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool,
+}
+
+HomeList.defaultProps = { isLoading: false }
 
 export default HomeList

@@ -14,6 +14,7 @@ const Title = styled.h3`
     line-height: 21px;
     color: #7c7c7c;
 `
+
 const Input = styled.input`
     width: 100%;
     padding: 6px;
@@ -25,6 +26,7 @@ const Input = styled.input`
     line-height: 21px;
     transition: all 0.3s ease;
 `
+
 const ErrorMessage = styled.p`
     margin-left: 6px;
     font-size: 12px;
@@ -33,9 +35,9 @@ const ErrorMessage = styled.p`
     text-align: left;
 `
 
-function CommonInput({ title, errorMessage, label, register, required, attributes }) {
+function CommonInput({ title, errorMessage, label, register, required, attributes, className }) {
     return (
-        <Label>
+        <Label className={className}>
             <Title>{title}</Title>
             <Input {...register(label, { required })} {...attributes}></Input>
             <ErrorMessage>{errorMessage}</ErrorMessage>
@@ -45,6 +47,7 @@ function CommonInput({ title, errorMessage, label, register, required, attribute
 
 CommonInput.propTypes = {
     title: PropTypes.string,
+    className: PropTypes.string,
     errorMessage: PropTypes.string,
     attributes: PropTypes.object,
     label: PropTypes.string.isRequired,
