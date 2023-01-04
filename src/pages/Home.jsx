@@ -16,7 +16,9 @@ function Home() {
                 <CommonNavbar />
             </CommonNavbarWrapper>
             <MainWrapper>
+                {/* Outlet */}
                 <Outlet />
+                {/* Outlet */}
             </MainWrapper>
         </div>
     )
