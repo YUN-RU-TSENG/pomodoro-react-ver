@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
+import { useDispatch } from 'react-redux'
+import { postTask } from '../../../features/tasks/tasksSlice'
 import { useState } from 'react'
 
 import styled from 'styled-components'
@@ -53,20 +55,18 @@ const Line = styled.div`
     height: 20px;
 `
 
-const Button = styled.button`
-    padding: 4px;
-    border-radius: 4px;
-`
-
 const schema = yup.object({
     name: yup.string().required(),
     totalExpectTime: yup.number().min(0),
     folder: yup.string(),
 })
 
-function HomeAddTask({ addTask }) {
+function HomeAddTask() {
     const [isTotalExpectTimePopoverOpen, setIsTotalExpectTimePopoverOpen] = useState(false)
     const [isFolderPopoverOpen, setIsFolderPopoverOpen] = useState(false)
+
+    const dispatch = useDispatch()
+
     const { register, handleSubmit, setValue, watch, reset } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
@@ -77,7 +77,7 @@ function HomeAddTask({ addTask }) {
     })
 
     const onSubmit = handleSubmit((data) => {
-        addTask(data)
+        dispatch(postTask(data))
         reset()
     })
 
@@ -86,16 +86,16 @@ function HomeAddTask({ addTask }) {
             <Add onClick={onSubmit} type="submit">
                 <AddImg src={AddIcon} />
             </Add>
-            <Input attributes={{}} label="name" register={register} />
+            <Input attributes={{ placeholder: '輸入任務名稱' }} label="name" register={register} />
             <CommonPopover
                 text="pomodoro"
                 isOpen={isTotalExpectTimePopoverOpen}
                 onClick={() => setIsTotalExpectTimePopoverOpen(!isTotalExpectTimePopoverOpen)}
             >
                 <CommonInput
-                    attributes={{ type: 'number', min: 0 }}
                     label="totalExpectTime"
                     register={register}
+                    attributes={{ type: 'number', min: 0, placeholder: '輸入任務番茄數量' }}
                 />
                 <CommonButton
                     color="green"
@@ -127,5 +127,9 @@ function HomeAddTask({ addTask }) {
         </AddTask>
     )
 }
+
+HomeAddTask.propTypes = {}
+
+HomeAddTask.defaultProps = {}
 
 export default HomeAddTask

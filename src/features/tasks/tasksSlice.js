@@ -14,6 +14,7 @@ import {
 import dayjs from 'dayjs'
 
 const initialState = {
+    selectUpdateTaskId: null,
     tasks: [],
     isLoadingTaskGet: false,
     ErrorOfTaskGet: null,
@@ -61,12 +62,13 @@ export const getTasks = createAsyncThunk('tasks/getTasks', async (_, { getState 
  * } 新增的 task 狀態
  * @returns {Promise} 成功返回新增的 task 狀態；失敗返回錯誤原因
  */
-export const postTask = createAsyncThunk('tasks/postTasks', async (currentTask, { getState }) => {
+export const postTask = createAsyncThunk('tasks/postTask', async (currentTask, { getState }) => {
     try {
         const taskRef = collection(db, 'tasks')
         const { user: userStore } = getState()
-        // 需要添加上用戶 uid
-        const { id } = await addDoc(taskRef, {
+
+        // 由表單傳來的資料需要補上其餘預設狀態後再添加至 firebase NoSQL
+        const taskData = {
             ...currentTask,
             totalSpendTime: 0,
             isFinish: false,
@@ -78,8 +80,12 @@ export const postTask = createAsyncThunk('tasks/postTasks', async (currentTask, 
             expectEndDate: dayjs().toISOString(),
             mentionDate: null,
             uid: userStore.user.uid,
-        })
-        return { id, ...currentTask }
+        }
+
+        // 需要添加上用戶 uid
+        const { id } = await addDoc(taskRef, taskData)
+
+        return { id, ...taskData }
     } catch (error) {
         throw error
     }
@@ -107,12 +113,13 @@ export const postTask = createAsyncThunk('tasks/postTasks', async (currentTask, 
  * } 更新的 task 狀態
  * @returns {Promise} 成功返回更新的 task id；失敗返回錯誤原因
  */
-export const updateTask = createAsyncThunk('tasks/updateTasks', async (id, currentTask) => {
+export const updateTask = createAsyncThunk('tasks/updateTask', async (currentTask) => {
     try {
-        const currentEditTaskId = doc(db, 'tasks', id)
+        const { id, ...task } = currentTask
+        const currentEditTaskReference = doc(db, 'tasks', currentTask.id)
         // 添加上用戶 uid、移除 id
-        const { id: currentId, ...task } = currentTask
-        await updateDoc(currentEditTaskId, task)
+        console.log(task.mentionDate, 'task.mentionDate')
+        await updateDoc(currentEditTaskReference, task)
         return { id, currentTask }
     } catch (error) {
         throw error
@@ -140,16 +147,27 @@ export const tasksSlice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        addTask(state, action) {
-            state.tasks.push(action.payload)
-        },
-        updateTask(state, action) {
-            const index = state.tasks.findIndex((item) => item.id === action.payload.id)
-            state.tasks.slice(index, 1, action.payload.currentTask)
-        },
-        deleteTask(state, action) {
-            const index = state.tasks.findIndex((item) => item.id === action.payload)
-            state.tasks.slice(index, 1)
+        // addTask(state, action) {
+        //     state.tasks.push(action.payload)
+        // },
+        // updateTask(state, action) {
+        //     const index = state.tasks.findIndex((item) => item.id === action.payload.id)
+        //     state.tasks.slice(index, 1, action.payload.currentTask)
+        // },
+        // deleteTask(state, action) {
+        //     const index = state.tasks.findIndex((item) => item.id === action.payload)
+        //     state.tasks.slice(index, 1)
+        // },
+        /**
+         * 更改 updateSelectTaskId
+         * @param {Object} state - task store
+         * @param {
+         *   payload: string|null
+         * } action
+         * @returns {Promise} 成功返回新增的 task 狀態；失敗返回錯誤原因
+         */
+        setUpdateSelectTaskId(state, action) {
+            state.selectUpdateTaskId = action.payload
         },
     },
     extraReducers(builder) {
@@ -170,6 +188,7 @@ export const tasksSlice = createSlice({
         builder
             // === postTasks ===
             .addCase(postTask.pending, (state, action) => {
+                state.ErrorOfTaskPost = null
                 state.isLoadingTaskPost = true
             })
             .addCase(postTask.fulfilled, (state, action) => {
@@ -183,12 +202,13 @@ export const tasksSlice = createSlice({
         builder
             // === updateTasks ===
             .addCase(updateTask.pending, (state, action) => {
+                state.ErrorOfTaskUpdate = null
                 state.isLoadingTaskUpdate = true
             })
             .addCase(updateTask.fulfilled, (state, action) => {
                 state.isLoadingTaskUpdate = false
                 const index = state.tasks.findIndex((item) => item.id === action.payload.id)
-                state.tasks.slice(index, 1, action.payload.currentTask)
+                state.tasks[index] = action.payload.currentTask
             })
             .addCase(updateTask.rejected, (state, action) => {
                 state.isLoadingTaskUpdate = false
@@ -197,12 +217,13 @@ export const tasksSlice = createSlice({
         builder
             // === deleteTasks ===
             .addCase(deleteTask.pending, (state, action) => {
+                state.ErrorOfTaskDelete = null
                 state.isLoadingTaskDelete = true
             })
             .addCase(deleteTask.fulfilled, (state, action) => {
                 state.isLoadingTaskDelete = false
                 const index = state.tasks.findIndex((item) => item.id === action.payload)
-                state.tasks.slice(index, 1)
+                state.tasks.splice(index, 1)
             })
             .addCase(deleteTask.rejected, (state, action) => {
                 state.isLoadingTaskDelete = false
@@ -213,4 +234,10 @@ export const tasksSlice = createSlice({
 
 export default tasksSlice.reducer
 
-// export const { addTask, updateTask, deleteTask } = tasksSlice.actions
+export const { setUpdateSelectTaskId } = tasksSlice.actions
+
+/* =========== Getter ========== */
+
+export const selectTaskById = (state) => {
+    return state.tasks.tasks.filter((task) => task.id === state.tasks.selectUpdateTaskId)[0]
+}

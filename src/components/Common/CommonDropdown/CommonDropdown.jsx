@@ -16,7 +16,7 @@ const DropdownItem = styled.div`
         cursor: pointer;
     }
 
-    background: ${(props) => (props.selectItem == props.item ? '#ededed' : '')};
+    background: ${(props) => (props.selectItem === props.item ? '#ededed' : '')};
 `
 
 function CommonDropdown({ items = ['s', 'sa'], selectItem = 's', updateSelectItem }) {

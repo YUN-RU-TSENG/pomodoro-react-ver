@@ -9,5 +9,5 @@ export default {
 const Template = (args) => <HomeList {...args} />
 
 export const Default = {
-    args: { children: 'button' },
+    args: {},
 }
