@@ -73,8 +73,11 @@ export function setupPomodoroClock(selectCountdownTaskId) {
       if (!pomodoroSetting.pomodoro) throw Error("缺少 user pomodoroSetting");
 
       // 若是有之前在計算的番茄鐘，清除之前的番茄鐘
-      const timer = getState((state) => state.pomodoroClock.timer);
-      if (timer.settimeoutId) clearInterval(timer.settimeoutId);
+      const timer = filterGetStateByFunction(
+        (state) => state.pomodoroClock.timer,
+        getState
+      );
+      if (timer.settimeoutId) dispatch(breakCountdown());
 
       // 依照用戶設置啟動番茄鐘
       dispatch(setSelectTaskId(selectCountdownTaskId));
@@ -126,6 +129,7 @@ export function startCountdown() {
           (state) => state.pomodoroClock.selectCountdownTaskId,
           getState
         );
+
         // 如果任務遭到刪除、修改成完成狀態，停止計時
         const task = filterGetStateByFunction((state) => {
           return state.tasks.tasks.filter(

@@ -10,6 +10,7 @@ import {
   setUpdateSelectTaskId,
   deleteTask,
 } from "../../../features/tasks/tasksSlice";
+import { breakCountdown } from "../../../features/pomodoroClock/pomodoroClockSlice";
 
 import debounce from "../../../utils/debounceFn";
 import dayjs from "dayjs";
@@ -176,6 +177,10 @@ function HomeEditForm() {
     };
     debounceUpdateTask(taskData);
   });
+
+  const selectCountdownTaskId = useSelector(
+    (state) => state.pomodoroClock.selectCountdownTaskId
+  );
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -383,6 +388,9 @@ function HomeEditForm() {
           onClick={() => {
             dispatch(deleteTask(selectUpdateTask.id));
             dispatch(setUpdateSelectTaskId(null));
+            if (selectCountdownTaskId === selectUpdateTask.id) {
+              dispatch(breakCountdown());
+            }
           }}
         >
           <Icon src={trashIcon}></Icon>
