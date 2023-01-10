@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const PomodoroWrapper = styled.div`
   background: #d34e4e;
   position: fixed;
-  transition: all 0.3 ease;
-  left: 0;
-  right: 0;
+  transition: all 0.3s ease-out, top 0.25s ease-out;
+  left: ${(props) => (props.isBig ? "0" : "calc(50vw - 160px)")};
+  right: ${(props) => (props.isBig ? "0" : "calc(50vw - 160px)")};
 
-  top: ${(props) => (props.isBig ? "0" : "auto")};
   bottom: ${(props) => (props.isBig ? "0" : "12px")};
+  top: ${(props) => (props.isBig ? "0" : "calc(100vh - 64px)")};
   margin: ${(props) => (props.isBig ? "0" : "auto")};
   width: ${(props) => (props.isBig ? "auto" : "320px")};
   border-radius: ${(props) => (props.isBig ? "0" : "4px")};

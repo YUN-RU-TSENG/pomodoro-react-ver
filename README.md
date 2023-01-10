@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# pomodoro-todo
+> react-ver
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Quick Start
 
-## Available Scripts
+```
+npm i
+npm run dev
+```
 
-In the project directory, you can run:
+## 目標
 
-### `npm start`
+### 主要目標
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-   [x] 用戶登入登出註冊
+-   [x] 用戶讀取、新增、刪除、修改 Task 項目
+-   [x] 番茄鐘功能
+    -   [x] 番茄鐘能夠依照用戶設置設置自動接續倒數
+    -   [x] 番茄鐘可以在倒數時縮小，用戶可以繼續其他操作行為
+    -   [x] 若是正在執行番茄計時的任務遭到刪除，番茄鐘會立刻中止
+-   [ ] 用戶可以修改用戶番茄鐘設置，包含：番茄工作時長、休息時長、長休息時長、長休息間隔
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 次要目標
 
-### `npm test`
+-   [ ] 番茄鐘使用習慣圖表
+    -   [ ] 用戶可以影印番茄鐘圖表
+-   [ ] 用戶可以設置番茄鐘倒數警示聲
+-   [ ] 用戶可以設置頭像
+-   [ ] E2E 測試
+-   [ ] Unit test
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+更多細節，見 Side Project 實作紀錄 >>> [用 Vue + Firebase 打造 Pomodoro | RU Tseng](https://yun-ru-tseng.github.io/posts/make-a-pomodoro/)

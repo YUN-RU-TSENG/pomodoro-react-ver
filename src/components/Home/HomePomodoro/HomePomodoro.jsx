@@ -39,7 +39,11 @@ function HomePomodoro() {
       <div>
         <S.PomodoroWrapper>
           <S.CloseWrapper>
-            <HomePomodoroClock isBig={false} time={0} />
+            <HomePomodoroClock
+              isBig={false}
+              time={0}
+              onClick={() => dispatch(setIsPomodoroOpen(true))}
+            />
             <p>無選中任務</p>
           </S.CloseWrapper>
         </S.PomodoroWrapper>
@@ -90,7 +94,7 @@ function HomePomodoro() {
   } else {
     return (
       <S.PomodoroWrapper>
-        <S.CloseWrapper>
+        <S.CloseWrapper onClick={() => dispatch(setIsPomodoroOpen(true))}>
           <HomePomodoroClock isBig={false} time={timer.countDownTime} />
           <p>{selectCountdownTask.name}</p>
           {timer.isStart ? (
