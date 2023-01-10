@@ -11,7 +11,7 @@ import {
     postFolder,
     isFolderLoading,
 } from '../../../features/folder/foldersSlice'
-
+import { setFilterTask } from '../../../features/tasks/tasksSlice'
 import CommonModal from '../../Common/CommonModal/CommonModal'
 import CommonInput from '../../Common/CommonInput/CommonInput'
 import CommonButton from '../../Common/CommonButton/CommonButton'
@@ -32,6 +32,7 @@ const schema = yup.object({
 
 function HomeSidebar() {
     const folders = useSelector((state) => state.folders.folders)
+    const filterTaskOfTaskStore = useSelector((state) => state.tasks.filterTask)
     const isFolderLoadingOfFolderStore = useSelector(isFolderLoading)
     const dispatch = useDispatch()
     const { isShow, toggleIsShow } = useToggle()
@@ -55,31 +56,48 @@ function HomeSidebar() {
     return (
         <S.Sidebar>
             <S.SidebarBody>
-                <S.SidebarItem>
+                <S.SidebarItem
+                    isSelect={filterTaskOfTaskStore === 'taskOfToday'}
+                    onClick={() => dispatch(setFilterTask('taskOfToday'))}
+                >
                     <S.Icon src={sunIcon}></S.Icon>
                     <S.Text>今天</S.Text>
                     <S.Time>4h</S.Time>
                     <S.Quantity>5</S.Quantity>
                 </S.SidebarItem>
-                <S.SidebarItem>
+                <S.SidebarItem
+                    isSelect={filterTaskOfTaskStore === 'taskOfFuture'}
+                    onClick={() => dispatch(setFilterTask('taskOfFuture'))}
+                >
                     <S.Icon src={sunsetIcon}></S.Icon>
                     <S.Text>稍後</S.Text>
                     <S.Time>4h</S.Time>
                     <S.Quantity>5</S.Quantity>
                 </S.SidebarItem>
-                <S.SidebarItem>
+                <S.SidebarItem
+                    isSelect={filterTaskOfTaskStore === 'taskOfNoExpectTime'}
+                    onClick={() =>
+                        dispatch(setFilterTask('taskOfNoExpectTime'))
+                    }
+                >
                     <S.Icon src={calenderNotYetIcon}></S.Icon>
                     <S.Text>尚未安排</S.Text>
                     <S.Time>4h</S.Time>
                     <S.Quantity>5</S.Quantity>
                 </S.SidebarItem>
-                <S.SidebarItem>
+                <S.SidebarItem
+                    isSelect={filterTaskOfTaskStore === 'all'}
+                    onClick={() => dispatch(setFilterTask('all'))}
+                >
                     <S.Icon src={calenderFinishIcon}></S.Icon>
                     <S.Text>全部</S.Text>
                     <S.Time>4h</S.Time>
                     <S.Quantity>5</S.Quantity>
                 </S.SidebarItem>
-                <S.SidebarItem>
+                <S.SidebarItem
+                    isSelect={filterTaskOfTaskStore === 'taskOfFinish'}
+                    onClick={() => dispatch(setFilterTask('taskOfFinish'))}
+                >
                     <S.Icon src={checkedIcon}></S.Icon>
                     <S.Text>已完成</S.Text>
                     <S.Time>4h</S.Time>
@@ -87,7 +105,11 @@ function HomeSidebar() {
                 </S.SidebarItem>
                 <S.Line />
                 {folders.map((folder) => (
-                    <S.SidebarItem key={folder.id}>
+                    <S.SidebarItem
+                        isSelect={filterTaskOfTaskStore === folder.name}
+                        key={folder.id}
+                        onClick={() => dispatch(setFilterTask(folder.name))}
+                    >
                         <S.Icon src={folderIcon}></S.Icon>
                         <S.Text>{folder.name}</S.Text>
                         <S.Time></S.Time>

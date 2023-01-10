@@ -1,3 +1,6 @@
+import { useSelector, useDispatch } from 'react-redux'
+import { timeSum } from '../../../features/tasks/tasksSlice'
+
 import styled from 'styled-components'
 
 const SumWrapper = styled.section`
@@ -29,23 +32,35 @@ const Text = styled.p`
 `
 
 function HomeTimeSum() {
+    const timeSumOfTaskStore = useSelector(timeSum)
+
     return (
         <SumWrapper>
             <SumItem>
-                <Quantity>3</Quantity>
+                <Quantity>
+                    {Math.ceil(
+                        timeSumOfTaskStore.theSumOfExpectTimeOfTask / 60 / 60
+                    )}
+                </Quantity>
                 <Text>預估時間 h</Text>
             </SumItem>
             <SumItem>
-                <Quantity>3</Quantity>
-                <Text>預估時間 h</Text>
+                <Quantity>
+                    {Math.ceil(
+                        timeSumOfTaskStore.theSumOfSpendTimeOfTask / 60 / 60
+                    )}
+                </Quantity>
+                <Text>總專注時間 h</Text>
             </SumItem>
             <SumItem>
-                <Quantity>3</Quantity>
-                <Text>預估時間 h</Text>
+                <Quantity>{timeSumOfTaskStore.theSumOfNumberOfTasks}</Quantity>
+                <Text>任務數量總和</Text>
             </SumItem>
             <SumItem>
-                <Quantity>3</Quantity>
-                <Text>預估時間 h</Text>
+                <Quantity>
+                    {timeSumOfTaskStore.theSumOfNumberOfFinishTasks}
+                </Quantity>
+                <Text>完成任務數量總和</Text>
             </SumItem>
         </SumWrapper>
     )

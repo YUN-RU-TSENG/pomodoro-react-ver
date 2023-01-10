@@ -29,8 +29,10 @@ export const SidebarItem = styled.a`
     align-items: center;
     transition: all 0.3s ease-in;
     border-radius: 4px;
+    background: ${(props) => props.isSelect && '#ededed'};
+
     &:hover {
-        background: #ededed;
+        background: #efefef;
     }
 `
 

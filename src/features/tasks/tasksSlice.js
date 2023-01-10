@@ -258,7 +258,7 @@ export const tasksSlice = createSlice({
 
 export default tasksSlice.reducer
 
-export const { setUpdateSelectTaskId } = tasksSlice.actions
+export const { setUpdateSelectTaskId, setFilterTask } = tasksSlice.actions
 
 /* =========== Getter ========== */
 
@@ -280,23 +280,27 @@ export const isTaskLoading = (state) => {
 
 export const filterTask = (state) => {
     const taskStore = state.tasks
+
     if (taskStore.filterTask === 'taskOfToday') {
         return taskStore.tasks.filter((task) => {
             if (task.expectEndDate)
                 return dayjs(task.expectEndDate).isSame(dayjs(), 'day')
         })
     }
+
     if (taskStore.filterTask === 'taskOfFuture') {
         return taskStore.tasks.filter((task) => {
             if (task.expectEndDate)
                 return dayjs(task.expectEndDate).isAfter(dayjs(), 'day')
         })
     }
+
     if (taskStore.filterTask === 'taskOfNoExpectTime') {
         return taskStore.tasks.filter((task) => {
             return !task.expectEndDate
         })
     }
+
     if (taskStore.filterTask === 'taskOfFinish') {
         return taskStore.tasks.filter((task) => {
             return task.isFinish
@@ -304,5 +308,54 @@ export const filterTask = (state) => {
     }
     if (taskStore.filterTask === 'all') {
         return taskStore.tasks
+    } else {
+        return taskStore.tasks.filter((task) => {
+            return task.folder === taskStore.filterTask
+        })
+    }
+}
+
+export const timeSum = (state) => {
+    const taskStore = state.tasks
+
+    // 任務總預估時間
+    const theSumOfExpectTimeOfTask = (() => {
+        return taskStore.tasks
+            .filter((item) => !item.isFinish && !!item.totalExpectTime)
+            .reduce((acc, cur) => {
+                return acc + cur.totalExpectTime
+            }, 0)
+    })()
+
+    // 任務總專注時間
+    const theSumOfSpendTimeOfTask = (() => {
+        return taskStore.tasks
+            .filter((item) => !item.isFinish && !!item.totalSpendTime)
+            .reduce((acc, cur) => {
+                return acc + cur.totalSpendTime
+            }, 0)
+    })()
+
+    // 任務數量總和
+    const theSumOfNumberOfTasks = (() => {
+        return taskStore.tasks.length
+    })()
+
+    // 未完成任務數量總和
+    const theSumOfNumberOfUnFinishTasks = (() => {
+        return taskStore.tasks.filter((item) => !item.isFinish).length
+    })()
+
+    // 完成任務數量總和
+    const theSumOfNumberOfFinishTasks = (() => {
+        return taskStore.tasks.filter((item) => !!item.isFinish).length
+    })()
+
+    return {
+        theSumOfExpectTimeOfTask,
+        theSumOfSpendTimeOfTask,
+        theSumOfNumberOfTasks,
+        theSumOfNumberOfUnFinishTasks,
+        theSumOfNumberOfFinishTasks,
     }
 }

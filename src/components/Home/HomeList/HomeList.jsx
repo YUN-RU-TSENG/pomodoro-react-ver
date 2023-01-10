@@ -4,6 +4,7 @@ import {
     deleteTask,
     setUpdateSelectTaskId,
     isTaskLoading,
+    filterTask,
 } from '../../../features/tasks/tasksSlice'
 
 import dayjs from 'dayjs'
@@ -59,7 +60,7 @@ const PositionLoading = styled(CommonLoading)`
 `
 
 function HomeList() {
-    const tasksStoreTasks = useSelector((state) => state.tasks.tasks)
+    const tasksStoreTasks = useSelector(filterTask)
     const tasksStoreIsLoadingTask = useSelector(isTaskLoading)
 
     const dispatch = useDispatch()
