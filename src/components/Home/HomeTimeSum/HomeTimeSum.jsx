@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { timeSum } from '../../../features/tasks/tasksSlice'
 
 import styled from 'styled-components'

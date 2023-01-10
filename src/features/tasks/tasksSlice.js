@@ -285,6 +285,7 @@ export const filterTask = (state) => {
         return taskStore.tasks.filter((task) => {
             if (task.expectEndDate)
                 return dayjs(task.expectEndDate).isSame(dayjs(), 'day')
+            return false
         })
     }
 
@@ -292,6 +293,7 @@ export const filterTask = (state) => {
         return taskStore.tasks.filter((task) => {
             if (task.expectEndDate)
                 return dayjs(task.expectEndDate).isAfter(dayjs(), 'day')
+            return false
         })
     }
 

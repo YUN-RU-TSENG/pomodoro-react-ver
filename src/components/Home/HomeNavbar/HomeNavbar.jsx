@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { logout } from '../../../features/user/userSlice'
 import { useNavigate } from 'react-router-dom'
 
