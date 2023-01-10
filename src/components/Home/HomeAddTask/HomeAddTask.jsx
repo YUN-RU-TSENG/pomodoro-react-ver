@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { postTask } from '../../../features/tasks/tasksSlice'
 import { useState } from 'react'
 
@@ -62,9 +62,10 @@ const schema = yup.object({
 })
 
 function HomeAddTask() {
-    const [isTotalExpectTimePopoverOpen, setIsTotalExpectTimePopoverOpen] = useState(false)
+    const [isTotalExpectTimePopoverOpen, setIsTotalExpectTimePopoverOpen] =
+        useState(false)
     const [isFolderPopoverOpen, setIsFolderPopoverOpen] = useState(false)
-
+    const folders = useSelector((state) => state.folders.folders)
     const dispatch = useDispatch()
 
     const { register, handleSubmit, setValue, watch, reset } = useForm({
@@ -86,20 +87,36 @@ function HomeAddTask() {
             <Add onClick={onSubmit} type="submit">
                 <AddImg src={AddIcon} />
             </Add>
-            <Input attributes={{ placeholder: '輸入任務名稱' }} label="name" register={register} />
+            <Input
+                attributes={{ placeholder: '輸入任務名稱' }}
+                label="name"
+                register={register}
+            />
             <CommonPopover
-                text="pomodoro"
+                text={watch('totalExpectTime') || 'pomodoro'}
                 isOpen={isTotalExpectTimePopoverOpen}
-                onClick={() => setIsTotalExpectTimePopoverOpen(!isTotalExpectTimePopoverOpen)}
+                onClick={() =>
+                    setIsTotalExpectTimePopoverOpen(
+                        !isTotalExpectTimePopoverOpen
+                    )
+                }
             >
                 <CommonInput
                     label="totalExpectTime"
                     register={register}
-                    attributes={{ type: 'number', min: 0, placeholder: '輸入任務番茄數量' }}
+                    attributes={{
+                        type: 'number',
+                        min: 0,
+                        placeholder: '輸入任務番茄數量',
+                    }}
                 />
                 <CommonButton
                     color="green"
-                    onClick={() => setIsTotalExpectTimePopoverOpen(!isTotalExpectTimePopoverOpen)}
+                    onClick={() =>
+                        setIsTotalExpectTimePopoverOpen(
+                            !isTotalExpectTimePopoverOpen
+                        )
+                    }
                     type="block"
                 >
                     關閉
@@ -107,12 +124,12 @@ function HomeAddTask() {
             </CommonPopover>
             <Line></Line>
             <CommonPopover
-                text="folder"
+                text={watch('folder') || 'folder'}
                 isOpen={isFolderPopoverOpen}
                 onClick={() => setIsFolderPopoverOpen(!isFolderPopoverOpen)}
             >
                 <CommonDropdown
-                    items={[1, 2, 3, 4]}
+                    items={folders.map((item) => item.name)}
                     selectItem={watch('folder')}
                     updateSelectItem={(value) => setValue('folder', value)}
                 />

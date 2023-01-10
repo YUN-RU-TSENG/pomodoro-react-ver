@@ -27,6 +27,12 @@ const ModalCard = styled.section`
     text-align: center;
 `
 
+const ModalCardBody = styled.section`
+    *:not(:last-child) {
+        margin-bottom: 12px;
+    }
+`
+
 const Close = styled.button`
     position: absolute;
     right: 6px;
@@ -53,7 +59,7 @@ function CommonModal({ children, title, onClick }) {
                     <Icon src={closeIcon}></Icon>
                 </Close>
                 <Message>{title}</Message>
-                {children}
+                {children && <ModalCardBody>{children}</ModalCardBody>}
             </ModalCard>
         </ModalWrapper>
     )

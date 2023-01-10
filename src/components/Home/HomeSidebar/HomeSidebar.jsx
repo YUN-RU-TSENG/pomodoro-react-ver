@@ -1,128 +1,127 @@
-import styled from "styled-components";
-import sunIcon from "../../../assets/images/sun.png";
-import sunsetIcon from "../../../assets/images/external-sunset-3.png";
-import calenderNotYetIcon from "../../../assets/images/calendar--v1-1.png";
-import calenderFinishIcon from "../../../assets/images/calendar--v1-2.png";
-import checkedIcon from "../../../assets/images/checked.png";
-import folderIcon from "../../../assets/images/folder-invoices--v1.png";
-import addIcon from "../../../assets/images/add--v1-1.png";
+import useToggle from '../../../hook/useToggle'
 
-const Sidebar = styled.aside`
-  display: flex;
-  flex-direction: column;
-  padding: 14px;
-  height: 100%;
-  box-shadow: 0px 0px 4px #ededed;
-  background: #fff;
-`;
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
-const SidebarBody = styled.section`
-  flex: 1 0 auto;
-  overflow: scroll;
+import { useSelector, useDispatch } from 'react-redux'
+import { postFolder } from '../../../features/folder/foldersSlice'
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
+import CommonModal from '../../Common/CommonModal/CommonModal'
+import CommonInput from '../../Common/CommonInput/CommonInput'
+import CommonButton from '../../Common/CommonButton/CommonButton'
 
-const SidebarFooter = styled.section`
-  flex: 0 1 auto;
-`;
+import * as S from './styles.js'
+import sunIcon from '../../../assets/images/sun.png'
+import sunsetIcon from '../../../assets/images/external-sunset-3.png'
+import calenderNotYetIcon from '../../../assets/images/calendar--v1-1.png'
+import calenderFinishIcon from '../../../assets/images/calendar--v1-2.png'
+import checkedIcon from '../../../assets/images/checked.png'
+import folderIcon from '../../../assets/images/folder-invoices--v1.png'
+import addIcon from '../../../assets/images/add--v1-1.png'
 
-const SidebarItem = styled.a`
-  cursor: pointer;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s ease-in;
-  border-radius: 4px;
-  &:hover {
-    background: #ededed;
-  }
-`;
-
-const Icon = styled.img`
-  width: 16px;
-  margin-right: 8px;
-`;
-
-const Text = styled.span`
-  font-size: 14px;
-  light-height: 21px;
-  font-weight: 400;
-`;
-
-const Time = styled.span`
-  font-size: 14px;
-  light-height: 21px;
-  margin-left: auto;
-  font-weight: 300;
-`;
-
-const Quantity = styled.span`
-  font-size: 14px;
-  light-height: 21px;
-  margin-left: 8px;
-  font-weight: 300;
-`;
-
-const Line = styled.div`
-  height: 1px;
-  background: #ededed;
-  margin: 8px 0px;
-`;
+const schema = yup.object({
+    name: yup.string().required(),
+})
 
 function HomeSidebar() {
-  return (
-    <Sidebar>
-      <SidebarBody>
-        {" "}
-        <SidebarItem>
-          <Icon src={sunIcon}></Icon>
-          <Text>今天</Text>
-          <Time>4h</Time>
-          <Quantity>5</Quantity>
-        </SidebarItem>
-        <SidebarItem>
-          <Icon src={sunsetIcon}></Icon>
-          <Text>稍後</Text>
-          <Time>4h</Time>
-          <Quantity>5</Quantity>
-        </SidebarItem>
-        <SidebarItem>
-          <Icon src={calenderNotYetIcon}></Icon>
-          <Text>尚未安排</Text>
-          <Time>4h</Time>
-          <Quantity>5</Quantity>
-        </SidebarItem>
-        <SidebarItem>
-          <Icon src={calenderFinishIcon}></Icon>
-          <Text>全部</Text>
-          <Time>4h</Time>
-          <Quantity>5</Quantity>
-        </SidebarItem>
-        <SidebarItem>
-          <Icon src={checkedIcon}></Icon>
-          <Text>已完成</Text>
-          <Time>4h</Time>
-          <Quantity>5</Quantity>
-        </SidebarItem>
-        <Line />
-        <SidebarItem>
-          <Icon src={folderIcon}></Icon>
-          <Text>資料夾名稱</Text>
-          <Time>4h</Time>
-          <Quantity>5</Quantity>
-        </SidebarItem>
-      </SidebarBody>
-      <SidebarFooter>
-        <SidebarItem>
-          <Icon src={addIcon}></Icon>
-          <Text>新增資料夾</Text>
-        </SidebarItem>
-      </SidebarFooter>
-    </Sidebar>
-  );
+    const folders = useSelector((state) => state.folders.folders)
+    const dispatch = useDispatch()
+    const { isShow, toggleIsShow } = useToggle()
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({
+        resolver: yupResolver(schema),
+    })
+
+    // 驗證資料狀態，成功驗證後發送並清空表單，關閉 modal
+    const onSubmitLogin = handleSubmit(async (formData) => {
+        dispatch(postFolder({ ...formData, color: 'null' }))
+        toggleIsShow()
+        reset()
+    })
+
+    return (
+        <S.Sidebar>
+            <S.SidebarBody>
+                <S.SidebarItem>
+                    <S.Icon src={sunIcon}></S.Icon>
+                    <S.Text>今天</S.Text>
+                    <S.Time>4h</S.Time>
+                    <S.Quantity>5</S.Quantity>
+                </S.SidebarItem>
+                <S.SidebarItem>
+                    <S.Icon src={sunsetIcon}></S.Icon>
+                    <S.Text>稍後</S.Text>
+                    <S.Time>4h</S.Time>
+                    <S.Quantity>5</S.Quantity>
+                </S.SidebarItem>
+                <S.SidebarItem>
+                    <S.Icon src={calenderNotYetIcon}></S.Icon>
+                    <S.Text>尚未安排</S.Text>
+                    <S.Time>4h</S.Time>
+                    <S.Quantity>5</S.Quantity>
+                </S.SidebarItem>
+                <S.SidebarItem>
+                    <S.Icon src={calenderFinishIcon}></S.Icon>
+                    <S.Text>全部</S.Text>
+                    <S.Time>4h</S.Time>
+                    <S.Quantity>5</S.Quantity>
+                </S.SidebarItem>
+                <S.SidebarItem>
+                    <S.Icon src={checkedIcon}></S.Icon>
+                    <S.Text>已完成</S.Text>
+                    <S.Time>4h</S.Time>
+                    <S.Quantity>5</S.Quantity>
+                </S.SidebarItem>
+                <S.Line />
+                {folders.map((folder) => (
+                    <S.SidebarItem key={folder.id}>
+                        <S.Icon src={folderIcon}></S.Icon>
+                        <S.Text>{folder.name}</S.Text>
+                        <S.Time></S.Time>
+                        <S.Quantity></S.Quantity>
+                    </S.SidebarItem>
+                ))}
+            </S.SidebarBody>
+            <S.SidebarFooter>
+                <S.SidebarItem onClick={toggleIsShow}>
+                    <S.Icon src={addIcon}></S.Icon>
+                    <S.Text>新增資料夾</S.Text>
+                </S.SidebarItem>
+            </S.SidebarFooter>
+            {isShow && (
+                <CommonModal
+                    title="新增資料夾"
+                    onClick={() => {
+                        toggleIsShow()
+                        reset()
+                    }}
+                >
+                    <form>
+                        <CommonInput
+                            attributes={{ placeholder: '請出入資料夾名稱' }}
+                            errorMessage={errors.name?.message}
+                            label="name"
+                            register={register}
+                            title="資料夾名稱，例如：讀書計畫"
+                        />
+                        <CommonButton
+                            color="green"
+                            onClick={onSubmitLogin}
+                            type="block"
+                        >
+                            新增
+                        </CommonButton>
+                    </form>
+                </CommonModal>
+            )}
+        </S.Sidebar>
+    )
 }
 
-export default HomeSidebar;
+export default HomeSidebar

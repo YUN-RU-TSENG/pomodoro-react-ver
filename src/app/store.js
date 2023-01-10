@@ -1,14 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
-import tasksReducer from "../features/tasks/tasksSlice";
-import userSlice from "../features/user/userSlice";
-import pomodoroSettingSlice from "../features/pomodoroSetting/pomodoroSettingSlice";
-import pomodoroClockSlice from "../features/pomodoroClock/pomodoroClockSlice";
+import { configureStore } from '@reduxjs/toolkit'
+import tasksReducer from '../features/tasks/tasksSlice'
+import userReducer from '../features/user/userSlice'
+import pomodoroSettingReducer from '../features/pomodoroSetting/pomodoroSettingSlice'
+import pomodoroClockReducer from '../features/pomodoroClock/pomodoroClockSlice'
+import foldersReducer from '../features/folder/foldersSlice'
 
 export const store = configureStore({
-  reducer: {
-    tasks: tasksReducer,
-    user: userSlice,
-    pomodoroSetting: pomodoroSettingSlice,
-    pomodoroClock: pomodoroClockSlice,
-  },
-});
+    reducer: {
+        tasks: tasksReducer,
+        user: userReducer,
+        pomodoroSetting: pomodoroSettingReducer,
+        pomodoroClock: pomodoroClockReducer,
+        folders: foldersReducer,
+    },
+})
