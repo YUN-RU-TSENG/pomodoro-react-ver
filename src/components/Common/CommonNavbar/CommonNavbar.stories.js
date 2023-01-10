@@ -1,13 +1,10 @@
-import CommonNavbar from './CommonNavbar.jsx'
+import CommonNavbar from "./CommonNavbar.jsx";
 
 export default {
-    title: 'Common/CommonNavbar',
-    component: CommonNavbar,
-}
-
-//👇 We create a “template” of how args map to rendering
-const Template = (args) => <CommonNavbar {...args} />
+  title: "Common/CommonNavbar",
+  component: CommonNavbar,
+};
 
 export const Default = {
-    args: { children: 'button' },
-}
+  args: { children: "button" },
+};

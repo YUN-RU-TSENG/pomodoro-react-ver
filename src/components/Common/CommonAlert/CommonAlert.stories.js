@@ -1,13 +1,10 @@
-import CommonAlert from './CommonAlert.jsx'
+import CommonAlert from "./CommonAlert.jsx";
 
 export default {
-    title: 'Common/CommonAlert',
-    component: CommonAlert,
-}
-
-//👇 We create a “template” of how args map to rendering
-const Template = (args) => <CommonAlert {...args} />
+  title: "Common/CommonAlert",
+  component: CommonAlert,
+};
 
 export const Default = {
-    args: { children: 'button' },
-}
+  args: { children: "button" },
+};

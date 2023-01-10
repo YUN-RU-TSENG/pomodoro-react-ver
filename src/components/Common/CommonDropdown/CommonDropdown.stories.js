@@ -1,13 +1,10 @@
-import CommonDropdown from './CommonDropdown.jsx'
+import CommonDropdown from "./CommonDropdown.jsx";
 
 export default {
-    title: 'Common/CommonDropdown',
-    component: CommonDropdown,
-}
-
-//👇 We create a “template” of how args map to rendering
-const Template = (args) => <CommonDropdown {...args} />
+  title: "Common/CommonDropdown",
+  component: CommonDropdown,
+};
 
 export const Default = {
-    args: {},
-}
+  args: {},
+};

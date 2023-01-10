@@ -1,13 +1,10 @@
-import CommonCheckbox from './CommonCheckbox.jsx'
+import CommonCheckbox from "./CommonCheckbox.jsx";
 
 export default {
-    title: 'Common/CommonCheckbox',
-    component: CommonCheckbox,
-}
-
-//👇 We create a “template” of how args map to rendering
-const Template = (args) => <CommonCheckbox {...args} />
+  title: "Common/CommonCheckbox",
+  component: CommonCheckbox,
+};
 
 export const Default = {
-    args: { children: 'button' },
-}
+  args: { children: "button" },
+};

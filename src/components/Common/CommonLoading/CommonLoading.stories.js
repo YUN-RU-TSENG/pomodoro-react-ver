@@ -1,17 +1,14 @@
-import CommonLoading from './CommonLoading.jsx'
+import CommonLoading from "./CommonLoading.jsx";
 
 export default {
-    title: 'Common/CommonLoading',
-    component: CommonLoading,
-}
-
-//👇 We create a “template” of how args map to rendering
-const Template = (args) => <CommonLoading {...args} />
+  title: "Common/CommonLoading",
+  component: CommonLoading,
+};
 
 export const Default = {
-    args: { text: '' },
-}
+  args: { text: "" },
+};
 
 export const Message = {
-    args: { text: '文字內容' },
-}
+  args: { text: "文字內容" },
+};

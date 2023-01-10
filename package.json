@@ -1,90 +1,91 @@
 {
-  "name": "tomato-todo-react",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
+    "name": "tomato-todo-react",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "analyze": "source-map-explorer 'build/static/js/*.js'",
+        "storybook": "start-storybook -p 6006 -s public",
+        "build-storybook": "build-storybook -s public",
+        "prepare": "husky install"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
         ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+        "overrides": [
+            {
+                "files": [
+                    "**/*.stories.*"
+                ],
+                "rules": {
+                    "import/no-anonymous-default-export": "off"
+                }
+            }
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "lint-staged": {
+        "src/**/*.{js,jsx}": [
+            "prettier --write",
+            "eslint --fix --ignore-path .gitignore"
+        ],
+        "src/**/*.{json,css,scss,md}": [
+            "prettier --write"
+        ]
+    },
+    "dependencies": {
+        "@floating-ui/react": "^0.15.1",
+        "@hookform/resolvers": "^2.9.10",
+        "@reduxjs/toolkit": "^1.9.1",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "dayjs": "^1.11.7",
+        "firebase": "^9.15.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-hook-form": "^7.41.3",
+        "react-redux": "^8.0.5",
+        "react-router-dom": "^6.6.0",
+        "react-scripts": "5.0.1",
+        "source-map-explorer": "^2.5.3",
+        "styled-components": "^5.3.6",
+        "web-vitals": "^2.1.4",
+        "yup": "^0.32.11"
+    },
+    "devDependencies": {
+        "@storybook/addon-actions": "^6.5.15",
+        "@storybook/addon-essentials": "^6.5.15",
+        "@storybook/addon-interactions": "^6.5.15",
+        "@storybook/addon-links": "^6.5.15",
+        "@storybook/builder-webpack5": "^6.5.15",
+        "@storybook/manager-webpack5": "^6.5.15",
+        "@storybook/node-logger": "^6.5.15",
+        "@storybook/preset-create-react-app": "^4.1.2",
+        "@storybook/react": "^6.5.15",
+        "@storybook/testing-library": "^0.0.13",
+        "babel-plugin-named-exports-order": "^0.0.2",
+        "eslint": "^8.31.0",
+        "husky": "^7.0.0",
+        "lint-staged": "^13.1.0",
+        "prettier": "^2.8.1",
+        "prop-types": "^15.8.1",
+        "webpack": "^5.75.0"
     }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
-    ]
-  },
-  "dependencies": {
-    "@floating-ui/react": "^0.15.1",
-    "@hookform/resolvers": "^2.9.10",
-    "@reduxjs/toolkit": "^1.9.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "dayjs": "^1.11.7",
-    "firebase": "^9.15.0",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.1.0",
-    "prettier": "^2.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.41.3",
-    "react-redux": "^8.0.5",
-    "react-router-dom": "^6.6.0",
-    "react-scripts": "5.0.1",
-    "source-map-explorer": "^2.5.3",
-    "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
-  },
-  "devDependencies": {
-    "@storybook/addon-actions": "^6.5.15",
-    "@storybook/addon-essentials": "^6.5.15",
-    "@storybook/addon-interactions": "^6.5.15",
-    "@storybook/addon-links": "^6.5.15",
-    "@storybook/builder-webpack5": "^6.5.15",
-    "@storybook/manager-webpack5": "^6.5.15",
-    "@storybook/node-logger": "^6.5.15",
-    "@storybook/preset-create-react-app": "^4.1.2",
-    "@storybook/react": "^6.5.15",
-    "@storybook/testing-library": "^0.0.13",
-    "babel-plugin-named-exports-order": "^0.0.2",
-    "prop-types": "^15.8.1",
-    "webpack": "^5.75.0"
-  }
 }

@@ -1,13 +1,10 @@
-import HomeDropdownPopover from './HomeDropdownPopover.jsx'
+import HomeDropdownPopover from "./HomeDropdownPopover.jsx";
 
 export default {
-    title: 'Home/HomeDropdownPopover',
-    component: HomeDropdownPopover,
-}
-
-//👇 We create a “template” of how args map to rendering
-const Template = (args) => <HomeDropdownPopover {...args} />
+  title: "Home/HomeDropdownPopover",
+  component: HomeDropdownPopover,
+};
 
 export const Default = {
-    args: { children: '' },
-}
+  args: { children: "" },
+};

@@ -1,12 +1,12 @@
 html {
-    font-size: 16px;
-    line-height: 24px;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
@@ -33,19 +33,19 @@ legend,
 article,
 aside,
 menu {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 button,
 input,
 textarea {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 a {
-    color: #000;
-    text-decoration: none;
+  color: #000;
+  text-decoration: none;
 }

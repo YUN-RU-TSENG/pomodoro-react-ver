@@ -1,21 +1,18 @@
-import CommonButton from './CommonButton.jsx'
+import CommonButton from "./CommonButton.jsx";
 
 export default {
-    title: 'Common/CommonButton',
-    component: CommonButton,
-}
-
-//👇 We create a “template” of how args map to rendering
-const Template = (args) => <CommonButton {...args} />
+  title: "Common/CommonButton",
+  component: CommonButton,
+};
 
 export const Default = {
-    args: { children: 'button' },
-}
+  args: { children: "button" },
+};
 
 export const Green = {
-    args: { children: 'button', color: 'green' },
-}
+  args: { children: "button", color: "green" },
+};
 
 export const Full = {
-    args: { children: 'button', color: 'green', type: 'block' },
-}
+  args: { children: "button", color: "green", type: "block" },
+};
