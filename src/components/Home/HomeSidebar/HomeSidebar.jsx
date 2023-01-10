@@ -62,8 +62,8 @@ function HomeSidebar() {
                 >
                     <S.Icon src={sunIcon}></S.Icon>
                     <S.Text>今天</S.Text>
-                    <S.Time>4h</S.Time>
-                    <S.Quantity>5</S.Quantity>
+                    <S.Time></S.Time>
+                    <S.Quantity></S.Quantity>
                 </S.SidebarItem>
                 <S.SidebarItem
                     isSelect={filterTaskOfTaskStore === 'taskOfFuture'}
@@ -71,8 +71,8 @@ function HomeSidebar() {
                 >
                     <S.Icon src={sunsetIcon}></S.Icon>
                     <S.Text>稍後</S.Text>
-                    <S.Time>4h</S.Time>
-                    <S.Quantity>5</S.Quantity>
+                    <S.Time></S.Time>
+                    <S.Quantity></S.Quantity>
                 </S.SidebarItem>
                 <S.SidebarItem
                     isSelect={filterTaskOfTaskStore === 'taskOfNoExpectTime'}
@@ -82,8 +82,8 @@ function HomeSidebar() {
                 >
                     <S.Icon src={calenderNotYetIcon}></S.Icon>
                     <S.Text>尚未安排</S.Text>
-                    <S.Time>4h</S.Time>
-                    <S.Quantity>5</S.Quantity>
+                    <S.Time></S.Time>
+                    <S.Quantity></S.Quantity>
                 </S.SidebarItem>
                 <S.SidebarItem
                     isSelect={filterTaskOfTaskStore === 'all'}
@@ -91,8 +91,8 @@ function HomeSidebar() {
                 >
                     <S.Icon src={calenderFinishIcon}></S.Icon>
                     <S.Text>全部</S.Text>
-                    <S.Time>4h</S.Time>
-                    <S.Quantity>5</S.Quantity>
+                    <S.Time></S.Time>
+                    <S.Quantity></S.Quantity>
                 </S.SidebarItem>
                 <S.SidebarItem
                     isSelect={filterTaskOfTaskStore === 'taskOfFinish'}
@@ -100,8 +100,8 @@ function HomeSidebar() {
                 >
                     <S.Icon src={checkedIcon}></S.Icon>
                     <S.Text>已完成</S.Text>
-                    <S.Time>4h</S.Time>
-                    <S.Quantity>5</S.Quantity>
+                    <S.Time></S.Time>
+                    <S.Quantity></S.Quantity>
                 </S.SidebarItem>
                 <S.Line />
                 {folders.map((folder) => (

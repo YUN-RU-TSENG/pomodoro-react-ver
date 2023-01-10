@@ -4,7 +4,7 @@ import { getAndInitialPomodoroSetting } from '../features/pomodoroSetting/pomodo
 
 import styled from 'styled-components'
 
-import CommonNavbar from '../components/Common/CommonNavbar/CommonNavbar.jsx'
+import HomeNavbar from '../components/Home/HomeNavbar/HomeNavbar.jsx'
 import CommonLoading from '../components/Common/CommonLoading/CommonLoading.jsx'
 import { Outlet } from 'react-router-dom'
 
@@ -27,7 +27,7 @@ function Home() {
         return (
             <div>
                 <CommonNavbarWrapper>
-                    <CommonNavbar />
+                    <HomeNavbar />
                 </CommonNavbarWrapper>
                 <MainWrapper></MainWrapper>
                 <CommonLoading text="加載用戶配置..." />
@@ -39,7 +39,7 @@ function Home() {
         return (
             <div>
                 <CommonNavbarWrapper>
-                    <CommonNavbar />
+                    <HomeNavbar />
                 </CommonNavbarWrapper>
                 <MainWrapper></MainWrapper>
             </div>
@@ -49,7 +49,7 @@ function Home() {
     return (
         <div>
             <CommonNavbarWrapper>
-                <CommonNavbar />
+                <HomeNavbar />
             </CommonNavbarWrapper>
             <MainWrapper>
                 {/* Outlet */}

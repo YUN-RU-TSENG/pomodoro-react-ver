@@ -54,13 +54,13 @@ function HomeTimeSum() {
             </SumItem>
             <SumItem>
                 <Quantity>{timeSumOfTaskStore.theSumOfNumberOfTasks}</Quantity>
-                <Text>任務數量總和</Text>
+                <Text>所有任務</Text>
             </SumItem>
             <SumItem>
                 <Quantity>
                     {timeSumOfTaskStore.theSumOfNumberOfFinishTasks}
                 </Quantity>
-                <Text>完成任務數量總和</Text>
+                <Text>完成任務</Text>
             </SumItem>
         </SumWrapper>
     )

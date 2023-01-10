@@ -1,3 +1,7 @@
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../../../features/user/userSlice'
+import { useNavigate } from 'react-router-dom'
+
 import styled from 'styled-components'
 import avatarIcon from '../../../assets/images/external-User-users-those-icons-fill-those-icons-3.png'
 import graphIcon from '../../../assets/images/combo-chart--v1.png'
@@ -49,7 +53,10 @@ const LinkItemImage = styled.img`
     width: 24px;
 `
 
-function CommonNavbar() {
+function HomeNavbar() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     return (
         <Navbar>
             <Avatar>
@@ -69,7 +76,12 @@ function CommonNavbar() {
                 <LinkItem>
                     <LinkItemImage src={settingIcon} />
                 </LinkItem>
-                <LinkItem>
+                <LinkItem
+                    onClick={() => {
+                        dispatch(logout())
+                        navigate('/login')
+                    }}
+                >
                     <LinkItemImage src={logoutIcon} />
                 </LinkItem>
             </LinkList>
@@ -77,4 +89,4 @@ function CommonNavbar() {
     )
 }
 
-export default CommonNavbar
+export default HomeNavbar
