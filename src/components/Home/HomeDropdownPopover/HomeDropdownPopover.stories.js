@@ -1,10 +1,10 @@
-import HomeDropdownPopover from "./HomeDropdownPopover.jsx";
+import HomeDropdownPopover from './HomeDropdownPopover.jsx'
 
 export default {
-  title: "Home/HomeDropdownPopover",
-  component: HomeDropdownPopover,
-};
+    title: 'Home/HomeDropdownPopover',
+    component: HomeDropdownPopover,
+}
 
 export const Default = {
-  args: { children: "" },
-};
+    args: { children: '' },
+}

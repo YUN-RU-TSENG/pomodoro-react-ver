@@ -1,10 +1,10 @@
-import CommonCheckbox from "./CommonCheckbox.jsx";
+import CommonCheckbox from './CommonCheckbox.jsx'
 
 export default {
-  title: "Common/CommonCheckbox",
-  component: CommonCheckbox,
-};
+    title: 'Common/CommonCheckbox',
+    component: CommonCheckbox,
+}
 
 export const Default = {
-  args: { children: "button" },
-};
+    args: { children: 'button' },
+}

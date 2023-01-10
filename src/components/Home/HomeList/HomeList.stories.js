@@ -1,10 +1,10 @@
-import HomeList from "./HomeList.jsx";
+import HomeList from './HomeList.jsx'
 
 export default {
-  title: "Home/HomeList",
-  component: HomeList,
-};
+    title: 'Home/HomeList',
+    component: HomeList,
+}
 
 export const Default = {
-  args: {},
-};
+    args: {},
+}

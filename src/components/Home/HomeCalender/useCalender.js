@@ -24,7 +24,8 @@ export default function useCalender(selectDate) {
     const updateCurrentTime = (updateMonth) => {
         if (!updateMonth) return
         if (updateMonth > 0) return setNow(now.add(updateMonth, 'month'))
-        if (updateMonth < 0) return setNow(now.subtract(Math.abs(updateMonth), 'month'))
+        if (updateMonth < 0)
+            return setNow(now.subtract(Math.abs(updateMonth), 'month'))
     }
 
     return {

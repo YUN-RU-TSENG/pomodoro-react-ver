@@ -1,10 +1,10 @@
-import HomeSidebar from "./HomeSidebar.jsx";
+import HomeSidebar from './HomeSidebar.jsx'
 
 export default {
-  title: "Home/HomeSidebar",
-  component: HomeSidebar,
-};
+    title: 'Home/HomeSidebar',
+    component: HomeSidebar,
+}
 
 export const Default = {
-  args: { children: "button" },
-};
+    args: { children: 'button' },
+}

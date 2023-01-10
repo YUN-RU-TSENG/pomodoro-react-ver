@@ -4,10 +4,10 @@
  * @returns {string} mm:ss 格式
  */
 export default function formatClockTime(time) {
-  const minute = Math.floor(time / 60);
-  const second = time % 60;
-  const formatMinute = minute < 10 ? "0" + minute : minute;
-  const formatSecond = second < 10 ? "0" + second : second;
+    const minute = Math.floor(time / 60)
+    const second = time % 60
+    const formatMinute = minute < 10 ? '0' + minute : minute
+    const formatSecond = second < 10 ? '0' + second : second
 
-  return `${formatMinute}:${formatSecond}`;
+    return `${formatMinute}:${formatSecond}`
 }

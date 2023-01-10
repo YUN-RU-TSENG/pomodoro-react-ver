@@ -1,10 +1,10 @@
-import HomeCalender from "./HomeCalender.jsx";
+import HomeCalender from './HomeCalender.jsx'
 
 export default {
-  title: "Home/HomeCalender",
-  component: HomeCalender,
-};
+    title: 'Home/HomeCalender',
+    component: HomeCalender,
+}
 
 export const Default = {
-  args: { children: "button" },
-};
+    args: { children: 'button' },
+}

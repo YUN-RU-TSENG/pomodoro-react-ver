@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 
-import { useFloating, offset, flip, shift, autoUpdate } from '@floating-ui/react'
+import {
+    useFloating,
+    offset,
+    flip,
+    shift,
+    autoUpdate,
+} from '@floating-ui/react'
 import { createPortal } from 'react-dom'
 
 const Wrapper = styled.div`

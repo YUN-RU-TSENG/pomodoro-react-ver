@@ -1,10 +1,10 @@
-import CommonAlert from "./CommonAlert.jsx";
+import CommonAlert from './CommonAlert.jsx'
 
 export default {
-  title: "Common/CommonAlert",
-  component: CommonAlert,
-};
+    title: 'Common/CommonAlert',
+    component: CommonAlert,
+}
 
 export const Default = {
-  args: { children: "button" },
-};
+    args: { children: 'button' },
+}

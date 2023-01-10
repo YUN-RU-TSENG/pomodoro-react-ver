@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+} from 'firebase/auth'
 import { auth } from '../../utils/firebaseAuth'
 
 const initialState = {
@@ -47,28 +51,42 @@ export const getUser = createAsyncThunk('user/getUser', () => {
  * @param {Object} 登入信箱、密碼
  * @returns {Promise} 成功返回 user 狀態；失敗返回錯誤原因
  */
-export const login = createAsyncThunk('user/login', async ({ email, password }) => {
-    try {
-        const { user } = await signInWithEmailAndPassword(auth, email, password)
-        return { email: user.email, uid: user.uid }
-    } catch (error) {
-        throw error
+export const login = createAsyncThunk(
+    'user/login',
+    async ({ email, password }) => {
+        try {
+            const { user } = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            )
+            return { email: user.email, uid: user.uid }
+        } catch (error) {
+            throw error
+        }
     }
-})
+)
 
 /**
  * 註冊
  * @param {Object} 註冊信箱、密碼
  * @returns {Promise} 成功返回 user 狀態；失敗返回錯誤原因
  */
-export const register = createAsyncThunk('user/register', async ({ email, password }) => {
-    try {
-        const { user } = await createUserWithEmailAndPassword(auth, email, password)
-        return { email: user.email, uid: user.uid }
-    } catch (error) {
-        throw error
+export const register = createAsyncThunk(
+    'user/register',
+    async ({ email, password }) => {
+        try {
+            const { user } = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            )
+            return { email: user.email, uid: user.uid }
+        } catch (error) {
+            throw error
+        }
     }
-})
+)
 
 export const logout = createAsyncThunk('user/logout', async () => {
     try {

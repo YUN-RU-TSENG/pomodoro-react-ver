@@ -74,7 +74,10 @@ function Register() {
     return (
         <MainWrapper>
             <div>
-                <CommonForm message="Pomodoro todo 優雅的使用待辦清單以及番茄鐘" title="Register">
+                <CommonForm
+                    message="Pomodoro todo 優雅的使用待辦清單以及番茄鐘"
+                    title="Register"
+                >
                     <CommonInput
                         errorMessage={errors.email?.message}
                         attributes={{ placeholder: '請輸入信箱' }}
@@ -83,11 +86,18 @@ function Register() {
                     />
                     <CommonInput
                         errorMessage={errors.password?.message}
-                        attributes={{ placeholder: '請輸入密碼', type: 'password' }}
+                        attributes={{
+                            placeholder: '請輸入密碼',
+                            type: 'password',
+                        }}
                         label="password"
                         register={register}
                     />
-                    <CommonButton type="block" color="green" onClick={onSubmitRegister}>
+                    <CommonButton
+                        type="block"
+                        color="green"
+                        onClick={onSubmitRegister}
+                    >
                         Register
                     </CommonButton>
                 </CommonForm>
@@ -96,7 +106,10 @@ function Register() {
                 </Box>
             </div>
             {isModalOpen && (
-                <CommonModal onClick={() => setModalOpen(false)} title="意外錯誤">
+                <CommonModal
+                    onClick={() => setModalOpen(false)}
+                    title="意外錯誤"
+                >
                     <p> {userStore.ErrorOfRegister.message}</p>
                 </CommonModal>
             )}

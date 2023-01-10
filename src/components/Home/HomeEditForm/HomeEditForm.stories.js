@@ -1,10 +1,10 @@
-import HomeEditForm from "./HomeEditForm.jsx";
+import HomeEditForm from './HomeEditForm.jsx'
 
 export default {
-  title: "Home/HomeEditForm",
-  component: HomeEditForm,
-};
+    title: 'Home/HomeEditForm',
+    component: HomeEditForm,
+}
 
 export const Default = {
-  args: { children: "button" },
-};
+    args: { children: 'button' },
+}

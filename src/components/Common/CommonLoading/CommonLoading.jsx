@@ -45,7 +45,7 @@ const Message = styled.p`
     margin-top: 4px;
 `
 
-function CommonLoading({ text,className }) {
+function CommonLoading({ text, className }) {
     return (
         <LoadWrapper className={className}>
             <LoadCard>

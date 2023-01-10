@@ -54,7 +54,7 @@ const Icon = styled.img`
     display: block;
 `
 
-function HomeCalender({  onSelectDataUpdate, selectCacheDate }) {
+function HomeCalender({ onSelectDataUpdate, selectCacheDate }) {
     const {
         currentMonth,
         currentYear,
@@ -74,13 +74,15 @@ function HomeCalender({  onSelectDataUpdate, selectCacheDate }) {
                 </Button>
             </Row>
             <Row justifyContent="flex-start">
-                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((item) => {
-                    return (
-                        <Column key={item}>
-                            <Text>{item}</Text>
-                        </Column>
-                    )
-                })}
+                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(
+                    (item) => {
+                        return (
+                            <Column key={item}>
+                                <Text>{item}</Text>
+                            </Column>
+                        )
+                    }
+                )}
             </Row>
             <Row justifyContent="flex-start">
                 {Array(currentMonthFirstDayOfWeek)
@@ -102,7 +104,11 @@ function HomeCalender({  onSelectDataUpdate, selectCacheDate }) {
                                     selectCacheDate &&
                                     dayjs(selectCacheDate).isSame(
                                         dayjs(
-                                            currentYear + ' ' + currentMonth + ' ' + (index + 1),
+                                            currentYear +
+                                                ' ' +
+                                                currentMonth +
+                                                ' ' +
+                                                (index + 1),
                                             'YYYY MMM DD'
                                         ),
                                         'date'
@@ -113,7 +119,11 @@ function HomeCalender({  onSelectDataUpdate, selectCacheDate }) {
                                 onClick={() => {
                                     onSelectDataUpdate(
                                         dayjs(
-                                            currentYear + ' ' + currentMonth + ' ' + (index + 1),
+                                            currentYear +
+                                                ' ' +
+                                                currentMonth +
+                                                ' ' +
+                                                (index + 1),
                                             'YYYY MMM DD'
                                         ).toISOString()
                                     )

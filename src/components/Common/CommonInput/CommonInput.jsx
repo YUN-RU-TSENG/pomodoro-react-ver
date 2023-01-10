@@ -35,7 +35,15 @@ const ErrorMessage = styled.p`
     text-align: left;
 `
 
-function CommonInput({ title, errorMessage, label, register, required, attributes, className }) {
+function CommonInput({
+    title,
+    errorMessage,
+    label,
+    register,
+    required,
+    attributes,
+    className,
+}) {
     return (
         <Label className={className}>
             <Title>{title}</Title>

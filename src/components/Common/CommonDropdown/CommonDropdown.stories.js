@@ -1,10 +1,10 @@
-import CommonDropdown from "./CommonDropdown.jsx";
+import CommonDropdown from './CommonDropdown.jsx'
 
 export default {
-  title: "Common/CommonDropdown",
-  component: CommonDropdown,
-};
+    title: 'Common/CommonDropdown',
+    component: CommonDropdown,
+}
 
 export const Default = {
-  args: {},
-};
+    args: {},
+}

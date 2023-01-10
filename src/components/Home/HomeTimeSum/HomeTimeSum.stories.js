@@ -1,10 +1,10 @@
-import HomeTimeSum from "./HomeTimeSum.jsx";
+import HomeTimeSum from './HomeTimeSum.jsx'
 
 export default {
-  title: "Home/HomeTimeSum",
-  component: HomeTimeSum,
-};
+    title: 'Home/HomeTimeSum',
+    component: HomeTimeSum,
+}
 
 export const Default = {
-  args: { children: "button" },
-};
+    args: { children: 'button' },
+}
