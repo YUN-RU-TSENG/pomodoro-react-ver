@@ -1,6 +1,18 @@
 # pomodoro-todo
 > react-ver
 
+![截圖 2023-01-10 下午7 59 00](https://user-images.githubusercontent.com/41847720/211546054-9df40576-c0ee-4383-8ef7-54d8cf816b8d.png)
+![截圖 2023-01-10 下午7 57 59](https://user-images.githubusercontent.com/41847720/211545843-95502345-b9a2-4cdb-b5d9-bf7667bb7b6a.png)
+
+## 使用技術
+
+- React(hook)
+- React Router
+- Redux(Redux toolkit)
+- component 皆為手刻，無額外使用 UI library
+- styled-components
+- dayjs
+
 ## Quick Start
 
 ```
@@ -8,7 +20,7 @@ npm i
 npm run dev
 ```
 
-## 目標
+## 功能
 
 ### 主要目標
 
@@ -29,4 +41,4 @@ npm run dev
 -   [ ] E2E 測試
 -   [ ] Unit test
 
-更多細節，見 Side Project 實作紀錄 >>> [用 Vue + Firebase 打造 Pomodoro | RU Tseng](https://yun-ru-tseng.github.io/posts/make-a-pomodoro/)
+該專案有 Vue3 版本，見 >>> [用 Vue + Firebase 打造 Pomodoro | RU Tseng](https://yun-ru-tseng.github.io/posts/make-a-pomodoro/)
