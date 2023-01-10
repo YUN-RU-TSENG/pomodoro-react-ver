@@ -11,10 +11,12 @@ import {
     where,
 } from 'firebase/firestore'
 import dayjs from 'dayjs'
+import showCommonModal from '../../components/Common/CommonModal'
 
 const initialState = {
     selectUpdateTaskId: null,
     tasks: [],
+    filterTask: 'all',
     isLoadingTaskGet: false,
     ErrorOfTaskGet: null,
     isLoadingTaskPost: false,
@@ -157,17 +159,6 @@ export const tasksSlice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        // addTask(state, action) {
-        //     state.tasks.push(action.payload)
-        // },
-        // updateTask(state, action) {
-        //     const index = state.tasks.findIndex((item) => item.id === action.payload.id)
-        //     state.tasks.slice(index, 1, action.payload.currentTask)
-        // },
-        // deleteTask(state, action) {
-        //     const index = state.tasks.findIndex((item) => item.id === action.payload)
-        //     state.tasks.slice(index, 1)
-        // },
         /**
          * 更改 updateSelectTaskId
          * @param {Object} state - task store
@@ -178,6 +169,9 @@ export const tasksSlice = createSlice({
          */
         setUpdateSelectTaskId(state, action) {
             state.selectUpdateTaskId = action.payload
+        },
+        setFilterTask(state, action) {
+            state.filterTask = action.payload
         },
     },
     extraReducers(builder) {
@@ -194,6 +188,10 @@ export const tasksSlice = createSlice({
             .addCase(getTasks.rejected, (state, action) => {
                 state.isLoadingTaskGet = false
                 state.ErrorOfTaskGet = action.error
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
         builder
             // === postTasks ===
@@ -208,6 +206,10 @@ export const tasksSlice = createSlice({
             .addCase(postTask.rejected, (state, action) => {
                 state.isLoadingTaskPost = false
                 state.ErrorOfTaskPost = action.error
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
         builder
             // === updateTasks ===
@@ -225,6 +227,10 @@ export const tasksSlice = createSlice({
             .addCase(updateTask.rejected, (state, action) => {
                 state.isLoadingTaskUpdate = false
                 state.ErrorOfTaskUpdate = action.error
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
         builder
             // === deleteTasks ===
@@ -242,6 +248,10 @@ export const tasksSlice = createSlice({
             .addCase(deleteTask.rejected, (state, action) => {
                 state.isLoadingTaskDelete = false
                 state.ErrorOfTaskDelete = action.error
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
     },
 })
@@ -256,4 +266,43 @@ export const selectTaskById = (state) => {
     return state.tasks.tasks.filter(
         (task) => task.id === state.tasks.selectUpdateTaskId
     )[0]
+}
+
+export const isTaskLoading = (state) => {
+    const taskStore = state.tasks
+    return (
+        taskStore.isLoadingTaskGet ||
+        taskStore.isLoadingTaskPost ||
+        taskStore.isLoadingTaskUpdate ||
+        taskStore.isLoadingTaskDelete
+    )
+}
+
+export const filterTask = (state) => {
+    const taskStore = state.tasks
+    if (taskStore.filterTask === 'taskOfToday') {
+        return taskStore.tasks.filter((task) => {
+            if (task.expectEndDate)
+                return dayjs(task.expectEndDate).isSame(dayjs(), 'day')
+        })
+    }
+    if (taskStore.filterTask === 'taskOfFuture') {
+        return taskStore.tasks.filter((task) => {
+            if (task.expectEndDate)
+                return dayjs(task.expectEndDate).isAfter(dayjs(), 'day')
+        })
+    }
+    if (taskStore.filterTask === 'taskOfNoExpectTime') {
+        return taskStore.tasks.filter((task) => {
+            return !task.expectEndDate
+        })
+    }
+    if (taskStore.filterTask === 'taskOfFinish') {
+        return taskStore.tasks.filter((task) => {
+            return task.isFinish
+        })
+    }
+    if (taskStore.filterTask === 'all') {
+        return taskStore.tasks
+    }
 }

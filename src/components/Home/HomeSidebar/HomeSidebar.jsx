@@ -1,15 +1,21 @@
-import useToggle from '../../../hook/useToggle'
-
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
+import { createPortal } from 'react-dom'
+
+import useToggle from '../../../hook/useToggle'
+
 import { useSelector, useDispatch } from 'react-redux'
-import { postFolder } from '../../../features/folder/foldersSlice'
+import {
+    postFolder,
+    isFolderLoading,
+} from '../../../features/folder/foldersSlice'
 
 import CommonModal from '../../Common/CommonModal/CommonModal'
 import CommonInput from '../../Common/CommonInput/CommonInput'
 import CommonButton from '../../Common/CommonButton/CommonButton'
+import CommonLoading from '../../Common/CommonLoading/CommonLoading'
 
 import * as S from './styles.js'
 import sunIcon from '../../../assets/images/sun.png'
@@ -26,6 +32,7 @@ const schema = yup.object({
 
 function HomeSidebar() {
     const folders = useSelector((state) => state.folders.folders)
+    const isFolderLoadingOfFolderStore = useSelector(isFolderLoading)
     const dispatch = useDispatch()
     const { isShow, toggleIsShow } = useToggle()
 
@@ -120,6 +127,8 @@ function HomeSidebar() {
                     </form>
                 </CommonModal>
             )}
+            {isFolderLoadingOfFolderStore &&
+                createPortal(<CommonLoading></CommonLoading>, document.body)}
         </S.Sidebar>
     )
 }

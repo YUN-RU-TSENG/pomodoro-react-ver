@@ -4,7 +4,6 @@ import { getAndInitialPomodoroSetting } from '../features/pomodoroSetting/pomodo
 
 import styled from 'styled-components'
 
-import CommonModal from '../components/Common/CommonModal/CommonModal.jsx'
 import CommonNavbar from '../components/Common/CommonNavbar/CommonNavbar.jsx'
 import CommonLoading from '../components/Common/CommonLoading/CommonLoading.jsx'
 import { Outlet } from 'react-router-dom'
@@ -43,12 +42,6 @@ function Home() {
                     <CommonNavbar />
                 </CommonNavbarWrapper>
                 <MainWrapper></MainWrapper>
-                <CommonModal onClick={() => {}} title="意外錯誤">
-                    <p>
-                        {' '}
-                        {pomodoroSettingStore.ErrorOfPomodoroSettingGet.message}
-                    </p>
-                </CommonModal>
             </div>
         )
     }

@@ -11,7 +11,9 @@ const LoadWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999;
 `
+
 const LoadCard = styled.section`
     padding: 24px;
     background: rgba(0, 0, 0, 0.3);

@@ -5,6 +5,7 @@ import {
     signOut,
 } from 'firebase/auth'
 import { auth } from '../../utils/firebaseAuth'
+import showCommonModal from '../../components/Common/CommonModal'
 
 const initialState = {
     user: { email: null, uid: null },
@@ -118,6 +119,10 @@ export const tasksSlice = createSlice({
                 state.isLoadingUserGet = false
                 state.ErrorOfUserGet = action.error
                 state.isLoadedUserState = true
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
         // === Register ===
         builder
@@ -132,6 +137,10 @@ export const tasksSlice = createSlice({
             .addCase(register.rejected, (state, action) => {
                 state.isLoadingRegister = false
                 state.ErrorOfRegister = action.error
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
         // === login ===
         builder
@@ -146,6 +155,10 @@ export const tasksSlice = createSlice({
             .addCase(login.rejected, (state, action) => {
                 state.isLoadingLogin = false
                 state.ErrorOfLogin = action.error
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
         // === logout ===
         builder
@@ -159,6 +172,10 @@ export const tasksSlice = createSlice({
             .addCase(logout.rejected, (state, action) => {
                 state.isLoadingLogout = false
                 state.ErrorOfLogout = action.error
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
     },
 })

@@ -1,7 +1,9 @@
+import { createPortal } from 'react-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
     deleteTask,
     setUpdateSelectTaskId,
+    isTaskLoading,
 } from '../../../features/tasks/tasksSlice'
 
 import dayjs from 'dayjs'
@@ -58,9 +60,7 @@ const PositionLoading = styled(CommonLoading)`
 
 function HomeList() {
     const tasksStoreTasks = useSelector((state) => state.tasks.tasks)
-    const tasksStoreIsLoadingTaskGet = useSelector(
-        (state) => state.tasks.isLoadingTaskGet
-    )
+    const tasksStoreIsLoadingTask = useSelector(isTaskLoading)
 
     const dispatch = useDispatch()
 
@@ -88,7 +88,8 @@ function HomeList() {
     return (
         <List className="home-list">
             {itemElements}
-            {tasksStoreIsLoadingTaskGet && <PositionLoading />}
+            {tasksStoreIsLoadingTask &&
+                createPortal(<PositionLoading />, document.body)}
         </List>
     )
 }

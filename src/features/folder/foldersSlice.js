@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { db } from '../../utils/firebaseStore'
 import { collection, getDocs, addDoc, query, where } from 'firebase/firestore'
 import dayjs from 'dayjs'
+import showCommonModal from '../../components/Common/CommonModal'
 
 const initialState = {
     folders: [],
@@ -95,6 +96,10 @@ export const foldersSlice = createSlice({
             .addCase(getFolders.rejected, (state, action) => {
                 state.isLoadingFoldersGet = false
                 state.ErrorOfFoldersGet = action.error
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
         builder
             // === postFolder ===
@@ -109,8 +114,17 @@ export const foldersSlice = createSlice({
             .addCase(postFolder.rejected, (state, action) => {
                 state.isLoadingFoldersPost = false
                 state.ErrorOfFoldersPost = action.error
+                showCommonModal({
+                    title: '意外錯誤',
+                    children: action.error.message,
+                })
             })
     },
 })
 
 export default foldersSlice.reducer
+
+export const isFolderLoading = (state) => {
+    const foldersStore = state.folders
+    return foldersStore.isLoadingFoldersGet || foldersStore.isLoadingFoldersPost
+}
