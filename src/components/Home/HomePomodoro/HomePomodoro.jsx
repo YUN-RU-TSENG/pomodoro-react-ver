@@ -10,13 +10,16 @@ import HomePomodoroClock from './HomePomodoroClock'
 
 import * as S from './styles'
 import viewIcon from '../../../assets/images/full-page-view-1.png'
-import closeIcon from '../../../assets/images/delete-sign.png'
+// import closeIcon from '../../../assets/images/delete-sign.png'
 import playIcon from '../../../assets/images/circled-play.png'
 import stopIcon from '../../../assets/images/circled-pause.png'
 import brakeIcon from '../../../assets/images/stop-squared.png'
 
 function HomePomodoro() {
     const timer = useSelector((state) => state.pomodoroClock.timer)
+    const pomodoroSetting = useSelector(
+        (state) => state.pomodoroClock.pomodoroSetting
+    )
     const selectCountdownTaskIdOfClockStore = useSelector(
         (state) => state.pomodoroClock.selectCountdownTaskId
     )
@@ -57,23 +60,24 @@ function HomePomodoro() {
                         <S.Icon src={viewIcon} width="24px" />
                     </S.Toggle>
                     <S.TaskCard>
-                        <input type="checkbox" name="" id="" />
+                        {/* <input type="checkbox" name="" id="" /> */}
                         <div>
                             <p>{selectCountdownTask.name}</p>
-                            <p>
+                            {/* <p>
                                 完成：{selectCountdownTask.totalSpendTime} /
                                 預期：
                                 {selectCountdownTask.totalExpectTime}
-                            </p>
+                            </p> */}
                         </div>
-                        <S.TaskClose>
+                        {/* <S.TaskClose>
                             <S.Icon src={closeIcon} width="12px" />
-                        </S.TaskClose>
+                        </S.TaskClose> */}
                     </S.TaskCard>
                     <S.PomodoroClock>
                         <HomePomodoroClock
                             isBig={true}
                             time={timer.countDownTime}
+                            totalTime={pomodoroSetting[timer.mode]}
                         />
                     </S.PomodoroClock>
                     <S.PomodoroToggleButtonWrapper>
@@ -104,6 +108,7 @@ function HomePomodoro() {
                     <HomePomodoroClock
                         isBig={false}
                         time={timer.countDownTime}
+                        totalTime={pomodoroSetting[timer.mode]}
                     />
                     <p>{selectCountdownTask.name}</p>
                     {timer.isStart ? (

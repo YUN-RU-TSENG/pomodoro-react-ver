@@ -5,6 +5,7 @@ import * as yup from 'yup'
 import { useSelector, useDispatch } from 'react-redux'
 import { postTask } from '../../../features/tasks/tasksSlice'
 import { useState } from 'react'
+import { covertPomodoroQuantityToSecond } from '../../../utils/covertBetweenSecondAndPomodoro'
 
 import styled from 'styled-components'
 import AddIcon from '../../../assets/images/add--v1.png'
@@ -66,6 +67,10 @@ function HomeAddTask() {
         useState(false)
     const [isFolderPopoverOpen, setIsFolderPopoverOpen] = useState(false)
     const folders = useSelector((state) => state.folders.folders)
+    const pomodoroOfPomodoroSettingStore = useSelector(
+        (state) => state.pomodoroSetting.pomodoroSetting.pomodoro
+    )
+
     const dispatch = useDispatch()
 
     const { register, handleSubmit, setValue, watch, reset } = useForm({
@@ -77,8 +82,16 @@ function HomeAddTask() {
         },
     })
 
-    const onSubmit = handleSubmit((data) => {
-        dispatch(postTask(data))
+    const onSubmit = handleSubmit((formData) => {
+        dispatch(
+            postTask({
+                ...formData,
+                totalExpectTime: covertPomodoroQuantityToSecond(
+                    pomodoroOfPomodoroSettingStore,
+                    formData.totalExpectTime
+                ),
+            })
+        )
         reset()
     })
 

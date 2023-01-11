@@ -4,13 +4,13 @@ import * as yup from 'yup'
 
 import { createPortal } from 'react-dom'
 
-import useToggle from '../../../hook/useToggle'
-
 import { useSelector, useDispatch } from 'react-redux'
 import {
     postFolder,
     isFolderLoading,
 } from '../../../features/folder/foldersSlice'
+import useToggle from '../../../hook/useToggle'
+
 import { setFilterTask } from '../../../features/tasks/tasksSlice'
 import CommonModal from '../../Common/CommonModal/CommonModal'
 import CommonInput from '../../Common/CommonInput/CommonInput'
@@ -26,16 +26,27 @@ import checkedIcon from '../../../assets/images/checked.png'
 import folderIcon from '../../../assets/images/folder-invoices--v1.png'
 import addIcon from '../../../assets/images/add--v1-1.png'
 
-const schema = yup.object({
-    name: yup.string().required(),
-})
-
 function HomeSidebar() {
     const folders = useSelector((state) => state.folders.folders)
     const filterTaskOfTaskStore = useSelector((state) => state.tasks.filterTask)
     const isFolderLoadingOfFolderStore = useSelector(isFolderLoading)
     const dispatch = useDispatch()
     const { isShow, toggleIsShow } = useToggle()
+
+    const schema = yup.object({
+        name: yup
+            .string()
+            .test(
+                'is-duplicate-folder-name',
+                '${path} name is duplicate',
+                (value) => {
+                    return folders.every((folder) => {
+                        return folder.name !== value
+                    })
+                }
+            )
+            .required(),
+    })
 
     const {
         register,

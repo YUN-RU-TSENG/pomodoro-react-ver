@@ -11,6 +11,10 @@ import {
     deleteTask,
 } from '../../../features/tasks/tasksSlice'
 import { breakCountdown } from '../../../features/pomodoroClock/pomodoroClockSlice'
+import {
+    covertPomodoroQuantityToSecond,
+    covertSecondToPomodoroQuantity,
+} from '../../../utils/covertBetweenSecondAndPomodoro'
 
 import debounce from '../../../utils/debounceFn'
 import dayjs from 'dayjs'
@@ -113,8 +117,8 @@ const Line = styled.div`
 const schema = yup.object({
     name: yup.string().required(),
     isFinish: yup.boolean(),
-    totalSpendTime: yup.number().min(0),
-    cacheTotalSpendTime: yup.number().min(0),
+    totalExpectTime: yup.number().min(0),
+    cacheTotalExpectTime: yup.number().min(0),
     expectEndDate: yup.string(),
     cacheExpectEndDate: yup.string(),
     mentionDate: yup.string(),
@@ -129,7 +133,9 @@ const schema = yup.object({
 function HomeEditForm() {
     const selectUpdateTask = useSelector(selectTaskById)
     const folders = useSelector((state) => state.folders.folders)
-
+    const pomodoroOfPomodoroSettingStore = useSelector(
+        (state) => state.pomodoroSetting.pomodoroSetting.pomodoro
+    )
     const dispatch = useDispatch()
 
     const {
@@ -143,8 +149,8 @@ function HomeEditForm() {
         defaultValues: {
             name: selectUpdateTask.name,
             isFinish: selectUpdateTask.isFinish,
-            totalSpendTime: selectUpdateTask.totalSpendTime,
-            cacheTotalSpendTime: selectUpdateTask.totalSpendTime || 0,
+            totalExpectTime: selectUpdateTask.totalExpectTime,
+            cacheTotalExpectTime: selectUpdateTask.totalExpectTime || 0,
             expectEndDate: selectUpdateTask.expectEndDate,
             cacheExpectEndDate: selectUpdateTask.expectEndDate,
             mentionDate: selectUpdateTask.mentionDate,
@@ -167,18 +173,20 @@ function HomeEditForm() {
         }, 1000)
     ).current
 
-    const submitForm = handleSubmit((value) => {
+    const submitForm = handleSubmit((formData) => {
         const {
-            cacheTotalSpendTime,
+            cacheTotalExpectTime,
             cacheExpectEndDate,
             cacheFolder,
             cacheSubtask,
             ...taskData
         } = {
             ...selectUpdateTask,
-            ...value,
+            ...formData,
         }
-        debounceUpdateTask(taskData)
+        debounceUpdateTask({
+            ...taskData,
+        })
     })
 
     const selectCountdownTaskId = useSelector(
@@ -191,7 +199,7 @@ function HomeEditForm() {
     }, [
         watch('name'),
         watch('isFinish'),
-        watch('totalSpendTime'),
+        watch('totalExpectTime'),
         watch('expectEndDate'),
         watch('mentionDate'),
         watch('subtasks'),
@@ -220,7 +228,12 @@ function HomeEditForm() {
                     </Button>
                     <Text>番茄鐘</Text>
                     <CommonPopover
-                        text={watch('totalSpendTime') || '0'}
+                        text={
+                            covertSecondToPomodoroQuantity(
+                                watch('totalExpectTime'),
+                                pomodoroOfPomodoroSettingStore
+                            ) || '0'
+                        }
                         isOpen={isPomodoroModalOpen}
                         onClick={() => {
                             setIsPomodoroModalOpen(!isPomodoroModalOpen)
@@ -228,15 +241,18 @@ function HomeEditForm() {
                     >
                         <CommonInput
                             attributes={{ type: 'number', min: 0 }}
-                            label="cacheTotalSpendTime"
+                            label="cacheTotalExpectTime"
                             register={register}
                         />
                         <CommonButton
                             color="green"
                             onClick={() => {
                                 setValue(
-                                    'totalSpendTime',
-                                    watch('cacheTotalSpendTime')
+                                    'totalExpectTime',
+                                    covertPomodoroQuantityToSecond(
+                                        pomodoroOfPomodoroSettingStore,
+                                        watch('cacheTotalExpectTime')
+                                    )
                                 )
                                 setIsPomodoroModalOpen(!isPomodoroModalOpen)
                             }}

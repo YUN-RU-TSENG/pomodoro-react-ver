@@ -38,11 +38,7 @@ function Tasks() {
                 </S.HomeTasksWrapper>
                 {!!selectUpdateTaskIdOfTasksStore && (
                     <S.HomeEditFormWrapper>
-                        <HomeEditForm
-                            key={selectUpdateTaskIdOfTasksStore}
-                            onClose={() => {}}
-                            onDeleteTask={() => {}}
-                        />
+                        <HomeEditForm key={selectUpdateTaskIdOfTasksStore} />
                     </S.HomeEditFormWrapper>
                 )}
             </S.ContentWrapper>

@@ -32,16 +32,17 @@ export const Icon = styled.img`
 `
 
 export const TaskCard = styled.section`
-    position: relative;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    background: #fff;
-    gap: 0px 12px;
-    width: 420px;
+    // display: flex;
+    // align-items: center;
+    // gap: 0px 12px;
+    // position: relative;
     margin: 0 auto;
+    background: #fff;
+    width: 420px;
+    padding: 8px;
     border-radius: 4px;
     margin-bottom: 60px;
+    text-align: center;
 `
 
 export const TaskClose = styled.div`

@@ -1,6 +1,20 @@
 import formatClockTime from '../../../utils/formatClockTime'
 
-function HomePomodoroClock({ isBig, time }) {
+function HomePomodoroClock({ isBig, time, totalTime }) {
+    const currentDeg = (() => {
+        const red = Math.floor(Math.floor((time / totalTime) * 100) * 3.6)
+        const white = 360 - red
+        console.log(white, red, time, totalTime)
+        return `calc(${white} * 3.14 * 190 * 2 / 360) calc(${red} * 3.14 * 190 * 2 / 360)`
+    })()
+
+    const currentSmallDeg = (() => {
+        const red = Math.floor(Math.floor((time / totalTime) * 100) * 3.6)
+        const white = 360 - red
+
+        return `calc(${white} * 3.14 * 16 * 2 / 360) calc(${red} * 3.14 * 16 * 2 / 360)`
+    })()
+
     if (isBig) {
         return (
             <svg height="400" width="400" viewBox="0 0 400 400" fill="red">
@@ -18,10 +32,9 @@ function HomePomodoroClock({ isBig, time }) {
                     cy="200"
                     stroke="#d34e4e"
                     fill="none"
-                    strokeDasharray="500"
+                    strokeDasharray={currentDeg}
                     strokeWidth="10"
-                    transformorigin="center"
-                    transform="rotate(270)"
+                    transform="rotate(270, 200, 200)"
                 />
                 <text
                     x="50%"
@@ -51,10 +64,9 @@ function HomePomodoroClock({ isBig, time }) {
                     cy="18"
                     stroke="#d34e4e"
                     fill="none"
-                    strokeDasharray="500"
+                    strokeDasharray={currentSmallDeg}
                     strokeWidth="2"
-                    transformorigin="center"
-                    transform="rotate(270)"
+                    transform="rotate(270, 18, 18)"
                 />
                 <text
                     x="50%"

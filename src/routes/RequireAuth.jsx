@@ -12,6 +12,7 @@ export default function RequireAuth(props) {
     const isLoadedUserStateOfUserStore = useSelector(
         (state) => state.user.isLoadedUserState
     )
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 

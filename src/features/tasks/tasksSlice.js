@@ -308,6 +308,7 @@ export const filterTask = (state) => {
             return task.isFinish
         })
     }
+
     if (taskStore.filterTask === 'all') {
         return taskStore.tasks
     } else {
