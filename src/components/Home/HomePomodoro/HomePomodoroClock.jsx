@@ -4,7 +4,7 @@ function HomePomodoroClock({ isBig, time, totalTime }) {
     const currentDeg = (() => {
         const red = Math.floor(Math.floor((time / totalTime) * 100) * 3.6)
         const white = 360 - red
-        console.log(white, red, time, totalTime)
+
         return `calc(${white} * 3.14 * 190 * 2 / 360) calc(${red} * 3.14 * 190 * 2 / 360)`
     })()
 

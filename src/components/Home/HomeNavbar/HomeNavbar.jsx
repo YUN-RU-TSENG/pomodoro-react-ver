@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../../features/user/userSlice'
 import { useNavigate } from 'react-router-dom'
 
@@ -54,6 +54,7 @@ const LinkItemImage = styled.img`
 `
 
 function HomeNavbar() {
+    const userEmail = useSelector((state) => state.user.user.email)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -61,7 +62,7 @@ function HomeNavbar() {
         <Navbar>
             <Avatar>
                 <AvatarImg src={avatarIcon} />
-                <AvatarText>test1@test.com</AvatarText>
+                <AvatarText>{userEmail}</AvatarText>
             </Avatar>
             <LinkList>
                 <LinkItem>
@@ -77,8 +78,8 @@ function HomeNavbar() {
                     <LinkItemImage src={settingIcon} />
                 </LinkItem>
                 <LinkItem
-                    onClick={() => {
-                        dispatch(logout())
+                    onClick={async () => {
+                        await dispatch(logout())
                         navigate('/login')
                     }}
                 >

@@ -100,10 +100,14 @@ export const logout = createAsyncThunk('user/logout', async () => {
 
 /* =========== Slice ========== */
 
-export const tasksSlice = createSlice({
+export const userSlice = createSlice({
     name: 'tasks',
     initialState,
-    reducers: {},
+    reducers: {
+        resetUser() {
+            return initialState
+        },
+    },
     extraReducers(builder) {
         builder
             // === getUser ===
@@ -180,8 +184,8 @@ export const tasksSlice = createSlice({
     },
 })
 
-export default tasksSlice.reducer
+export default userSlice.reducer
 
 /* =========== Actions Creator ========== */
 
-// export const {} = tasksSlice.actions
+export const { resetUser } = userSlice.actions

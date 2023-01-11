@@ -82,7 +82,11 @@ export const updatePomodoroSetting = createAsyncThunk(
 export const pomodoroSettingSlice = createSlice({
     name: 'pomodoroSetting',
     initialState,
-    reducers: {},
+    reducers: {
+        resetPomodoroSetting() {
+            return initialState
+        },
+    },
     extraReducers(builder) {
         builder
             // === getAndInitialPomodoroSetting ===
@@ -121,3 +125,5 @@ export const pomodoroSettingSlice = createSlice({
 })
 
 export default pomodoroSettingSlice.reducer
+
+export const { resetPomodoroSetting } = pomodoroSettingSlice.actions

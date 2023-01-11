@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { db } from '../../utils/firebaseStore'
 import {
+    orderBy,
     collection,
     getDocs,
     addDoc,
@@ -40,7 +41,8 @@ export const getTasks = createAsyncThunk(
             const { user: userStore } = getState()
             const taskRef = query(
                 collection(db, 'tasks'),
-                where('uid', '==', userStore.user.uid)
+                where('uid', '==', userStore.user.uid),
+                orderBy('createAt')
             )
             const taskSnapshots = await getDocs(taskRef)
             const result = []
@@ -173,6 +175,9 @@ export const tasksSlice = createSlice({
         setFilterTask(state, action) {
             state.filterTask = action.payload
         },
+        resetTask() {
+            return initialState
+        },
     },
     extraReducers(builder) {
         builder
@@ -258,7 +263,8 @@ export const tasksSlice = createSlice({
 
 export default tasksSlice.reducer
 
-export const { setUpdateSelectTaskId, setFilterTask } = tasksSlice.actions
+export const { setUpdateSelectTaskId, setFilterTask, resetTask } =
+    tasksSlice.actions
 
 /* =========== Getter ========== */
 

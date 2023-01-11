@@ -20,9 +20,12 @@ export default function RequireGuest(props) {
         if (!isLoadedUserStateOfUserStore) dispatch(getUser())
     }, [dispatch, isLoadedUserStateOfUserStore])
 
+    useEffect(() => {
+        if (userIdOfUserStore) navigate('/')
+    })
+
     // 判斷是否登入，有則返回頁面，無則返到登入頁
     if (!isLoadedUserStateOfUserStore) return <CommonLoading />
-    if (userIdOfUserStore) navigate('/')
 
     return props.children
 }

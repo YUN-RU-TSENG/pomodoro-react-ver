@@ -43,6 +43,9 @@ export const pomodoroClockSlice = createSlice({
         setIsStartOfTimer(state, action) {
             state.timer.isStart = action.payload
         },
+        resetPomodoroClock() {
+            return initialState
+        },
     },
 })
 
@@ -56,6 +59,7 @@ export const {
     setTimer,
     setIsStartOfTimer,
     setIsPomodoroOpen,
+    resetPomodoroClock,
 } = pomodoroClockSlice.actions
 
 /**

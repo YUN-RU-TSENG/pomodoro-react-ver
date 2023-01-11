@@ -81,7 +81,11 @@ export const postFolder = createAsyncThunk(
 export const foldersSlice = createSlice({
     name: 'folders',
     initialState,
-    reducers: {},
+    reducers: {
+        resetFolder() {
+            return initialState
+        },
+    },
     extraReducers(builder) {
         builder
             // === getFolders ===
@@ -123,6 +127,8 @@ export const foldersSlice = createSlice({
 })
 
 export default foldersSlice.reducer
+
+export const { resetFolder } = foldersSlice.actions
 
 export const isFolderLoading = (state) => {
     const foldersStore = state.folders

@@ -18,7 +18,7 @@ export const ContentWrapper = styled.div`
 `
 
 export const HomeListWrapper = styled.div`
-    height: 570px;
+    height: calc(100vh - 260px);
     overflow: scroll;
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none; /* Firefox */
